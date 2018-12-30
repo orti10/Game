@@ -13,12 +13,12 @@ public class Pacman {
 	private String type;
 	private int id;
 	private Point3D gps;
-	private int speed;
+	private double speed;
 	private double radius;
 	private Color color =Color.yellow;
 	private Pixel pix;
 	private Path path;
-	private int score;
+	private double score;
 
 	public Pacman() {
 		this.type ="P";
@@ -66,11 +66,11 @@ public class Pacman {
 		this.gps = gps;
 	}
 
-	public int getSpeed() {
+	public double getSpeed() {
 		return speed;
 	}
 
-	public void setSpeed(int speed) {
+	public void setSpeed(double speed) {
 		this.speed = speed;
 	}
 
@@ -102,11 +102,11 @@ public class Pacman {
 		this.path = path;
 	}
 
-	public int getScore() {
+	public double getScore() {
 		return score;
 	}
 
-	public void setScore(int score) {
+	public void setScore(double score) {
 		this.score = score;
 	}
 

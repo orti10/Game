@@ -14,7 +14,7 @@ public class Fruit {
 	private String type;
 	private int id;
 	private Point3D gps;
-	private int weight;
+	private double weight;
 	private Color color =Color.red;
 	private Pixel pix;
 	private String currentTime;
@@ -64,11 +64,11 @@ public class Fruit {
 		this.gps = gps;
 	}
 
-	public int getWeight() {
+	public double getWeight() {
 		return weight;
 	}
 
-	public void setWeight(int weight) {
+	public void setWeight(double weight) {
 		this.weight = weight;
 	}
 
