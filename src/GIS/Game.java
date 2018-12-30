@@ -1,13 +1,6 @@
 package GIS;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import Geom.Point3D;
 /**
  * 
@@ -33,24 +26,11 @@ public class Game implements Runnable {
 	 * @param csvFile
 	 * @return game full of readen data
 	 */
-	public void ReadCSV(String csvFile) {
-		BufferedReader br = null;
-		String line = "";
-		Map map = new Map();
-		try {
-			//Reads from the csv file
-			br = new BufferedReader(new FileReader(csvFile)); 
-			line=br.readLine(); 
-
-			//If the file doesn't contains one of this it is not a good file 
-			if(!line.contains("Lat") || !line.contains("Lon") || !line.contains("Alt")) {   
-				//do nothing
-			}
-			//Progressing while we have a next line to read
-			while ((line = br.readLine()) != null) { 
-				//Splits the line to array by the ","
-				String[] s = line.split(","); 
-				//if the type of the element is Pacman
+	public void ReadBoard(ArrayList<String> board) {
+	
+			for (int i=0;i < board.size(); i++) { 
+				String[] s = board.get(i).split(","); 
+				
 				if(s[0].contains("P")) {
 					Pacman pac = new Pacman();
 					pac.setId(Integer.parseInt(s[1]));
@@ -59,7 +39,6 @@ public class Game implements Runnable {
 					pac.setRadius(Double.parseDouble(s[6]));
 					this.ap.add(pac);
 				}
-				//if the type of the element is Fruit
 				else if (s[0].contains("F")){
 					Fruit f = new Fruit();
 					f.setId(Integer.parseInt(s[1]));
@@ -83,13 +62,6 @@ public class Game implements Runnable {
 
 				}
 			}
-
-		}
-
-		catch (IOException er) {
-			er.printStackTrace();
-		}
-
 
 	}
 

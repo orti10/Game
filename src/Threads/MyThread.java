@@ -1,7 +1,6 @@
 package Threads;
 
 import java.util.ArrayList;
-import GIS.Line;
 import GIS.Game;
 import GIS.ShortestPathAlgo;
 import GUI.MyFrame;
@@ -15,20 +14,17 @@ public class MyThread extends Thread {
 
 	private Game game;
 	private MyFrame mf;
-	private ArrayList<Line> lineArray;
 /**
  * 
  * @param mf (MyFrame)
  * @param game
- * @param lineArray of lines
  * 
- * @note this method using the frame the game and the line that are already existing.
+ * @note this method using the frame the game already existing.
  */
-	public MyThread (MyFrame mf,Game game,ArrayList<Line> lineArray) {
+	public MyThread (MyFrame mf,Game game) {
 		super();
 		this.mf = mf;
 		this.game = game;
-		this.lineArray = lineArray;
 	}
 	/**
 	 * run starts the game on the board when the user click/choose "run" option from the menu.
@@ -41,9 +37,6 @@ public class MyThread extends Thread {
 		//calculate when the loop starts
 		long startTime =System.nanoTime();
 		while(game.getAf().size()!=0) {
-			Line ans = SPA.shortesPath(game.getAp(), game.getAf()); 
-			lineArray.add(ans);
-
 			try {
 				sleep(1000);
 				mf.repaint();

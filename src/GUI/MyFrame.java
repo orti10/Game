@@ -12,12 +12,12 @@ import GIS.Box;
 import GIS.Fruit;
 import GIS.Game;
 import GIS.Ghost;
-import GIS.Line;
 import GIS.Map;
 import GIS.Myplayer;
 import GIS.Pacman;
 import Geom.Pixel;
 import Geom.Point3D;
+import Robot.Play;
 import Threads.MyThread;
 import javax.imageio.ImageIO;
 
@@ -36,8 +36,7 @@ public class MyFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	public BufferedImage myImage ,packmanIcon ,fruitIcon,ghostIcon,MyplayerIcon;
 	private Game game = new Game();
-	private ArrayList<Line> lineArray = new ArrayList<Line>();
-	
+	private Play play1 = new Play();
 	
 	private double w = 1386;
 	private double h = 732;
@@ -57,8 +56,6 @@ public class MyFrame extends JFrame {
 		JMenu file = new JMenu("Game"); 
 		JMenuItem clear = new JMenuItem("Clear");
 		JMenuItem open = new JMenuItem("Open");
-		JMenuItem saveToKML = new JMenuItem("Save To KML");
-		JMenuItem saveToCSV = new JMenuItem("Save to CSV");
 		JMenuItem exit = new JMenuItem("Exit");
 
 		JMenu input = new JMenu("Input"); 
@@ -70,8 +67,6 @@ public class MyFrame extends JFrame {
 		menuBar.add(file);
 		file.add(clear); 
 		file.add(open); 
-		file.add(saveToKML); 
-		file.add(saveToCSV); 
 		file.add(exit); 
 		menuBar.add(input);
 		input.add(myplayer);
@@ -82,8 +77,6 @@ public class MyFrame extends JFrame {
 		//if the user wants to use a shortcuts on the keyboard
 		clear.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,  ActionEvent.CTRL_MASK));
 		open.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,  ActionEvent.CTRL_MASK));
-		saveToKML.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S,  ActionEvent.CTRL_MASK));
-		saveToCSV.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D,  ActionEvent.CTRL_MASK));
 		exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,  ActionEvent.CTRL_MASK));
 		run.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,  ActionEvent.CTRL_MASK));
 
@@ -110,7 +103,8 @@ public class MyFrame extends JFrame {
 					String fi=f.getPath();
 					
 					if(fi!=null) {
-						game.ReadCSV(fi);
+						play1 = new Play(fi);
+						game.ReadBoard(play1.getBoard());
 						Map m = new Map();
 
 						ArrayList<Fruit> sf = game.getAf();
@@ -147,7 +141,6 @@ public class MyFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				game = new Game();
-				lineArray = new ArrayList<Line>();
 				repaint();	
 			}
 		});
@@ -218,9 +211,11 @@ public class MyFrame extends JFrame {
 		run.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				MyThread t = new MyThread(MyFrame.this,game,lineArray);
-				t.start();
+//				MyThread t = new MyThread(MyFrame.this,game);
+//				t.start();
 				//link to MyThread
+				ArrayList<String> s = play1.getBoard();
+				System.out.println(s.get(15));
 			}
 		});
 	}
