@@ -14,6 +14,7 @@ import GIS.Map;
 import GIS.Pacman;
 import Geom.Pixel;
 import Geom.Point3D;
+import Robot.Play;
 import Threads.MyThread;
 import javax.imageio.ImageIO;
 
@@ -34,7 +35,8 @@ public class MyFrame extends JFrame {
 	public BufferedImage myImage ,packmanIcon ,fruitIcon;
 	private Game game = new Game();
 	private ArrayList<Line> lineArray = new ArrayList<Line>();
-
+	
+	
 	private double w = 1386;
 	private double h = 732;
 
@@ -212,9 +214,10 @@ public class MyFrame extends JFrame {
 		this.setJMenuBar(getJMenuBar());
 		super.paint(g);
 		Graphics2D g2 = (Graphics2D) g;
+	
 		try {
 			packmanIcon =ImageIO.read(new File("C:\\Users\\tomer\\eclipse-workspace\\MyProject3\\pacman.png"));
-			fruitIcon =ImageIO.read(new File("C:\\Users\\tomer\\eclipse-workspace\\MyProject3\\fruit.png"));
+			fruitIcon =ImageIO.read(new File("C:\\Users\\tomer\\Desktop\\ghosts_pacman_37873.png"));
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -237,6 +240,7 @@ public class MyFrame extends JFrame {
 			g2.drawLine((int)lineArray.get(i).getStart().getX(),(int)lineArray.get(i).getStart().getY(),
 					(int)lineArray.get(i).getEnd().getX(),(int)lineArray.get(i).getEnd().getY());
 		}
+		
 		Proportionsize ( w , h);
 	}
 	
