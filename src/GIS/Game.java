@@ -16,24 +16,27 @@ import Geom.Point3D;
  * one of pacmans and the other of fruits
  */
 public class Game implements Runnable {
-
+	private Myplayer myplayer;
 	private ArrayList<Pacman> ap;
 	private ArrayList<Fruit> af;
-
+	private ArrayList<Box> boxes;
+	private ArrayList<Ghost> ghosts;
 	public Game() {
+		myplayer = new Myplayer();
 		ap = new ArrayList<Pacman>();
 		af = new ArrayList<Fruit>();
+		boxes = new ArrayList<Box>();
+		ghosts = new ArrayList<Ghost>();
 	}
 	/**
 	 * 
 	 * @param csvFile
 	 * @return game full of readen data
 	 */
-	public Game ReadCSV(String csvFile) {
+	public void ReadCSV(String csvFile) {
 		BufferedReader br = null;
 		String line = "";
-		Game g = new Game();
-
+		Map map = new Map();
 		try {
 			//Reads from the csv file
 			br = new BufferedReader(new FileReader(csvFile)); 
@@ -50,27 +53,35 @@ public class Game implements Runnable {
 				//if the type of the element is Pacman
 				if(s[0].contains("P")) {
 					Pacman pac = new Pacman();
-
 					pac.setId(Integer.parseInt(s[1]));
 					pac.setGps(new Point3D(Double.parseDouble(s[2]),Double.parseDouble(s[3]),Double.parseDouble(s[4])));
-					pac.setSpeed(Integer.parseInt(s[5]));
+					pac.setSpeed(Double.parseDouble(s[5]));
 					pac.setRadius(Double.parseDouble(s[6]));
-					ap.add(pac);
+					this.ap.add(pac);
 				}
 				//if the type of the element is Fruit
 				else if (s[0].contains("F")){
 					Fruit f = new Fruit();
-
 					f.setId(Integer.parseInt(s[1]));
-
 					f.setGps(new Point3D(Double.parseDouble(s[2]),Double.parseDouble(s[3]),Double.parseDouble(s[4])));
-					f.setWeight(Integer.parseInt(s[5]));
-
-					af.add(f);
+					f.setWeight(Double.parseDouble(s[5]));
+					this.af.add(f);
+				}
+				else if (s[0].contains("B")){
+					Box box = new Box();
+					box.setId(Integer.parseInt(s[1]));
+					box.setGps1(new Point3D(Double.parseDouble(s[2]),Double.parseDouble(s[3]),Double.parseDouble(s[4])));
+					box.setGps2(new Point3D(Double.parseDouble(s[5]),Double.parseDouble(s[6]),Double.parseDouble(s[7])));
+					this.boxes.add(box);
+					
+				}
+				else if (s[0].contains("G")){
+					Ghost ghost = new Ghost();
+					ghost.setId(Integer.parseInt(s[1]));
+					ghost.setGps(new Point3D(Double.parseDouble(s[2]),Double.parseDouble(s[3]),Double.parseDouble(s[4])));
+					this.ghosts.add(ghost);
 
 				}
-				g.af = af;
-				g.ap = ap;
 			}
 
 		}
@@ -78,56 +89,29 @@ public class Game implements Runnable {
 		catch (IOException er) {
 			er.printStackTrace();
 		}
-		return g;
+
 
 	}
-	/**
-	 * 
-	 * @param location
-	 * function that writes the csv file
-	 */
 
-	public void WriteCSV(String location) {
-		PrintWriter pw; 
-
-		try {
-			//The destination file to the csv file we created
-			pw = new PrintWriter(location ,"UTF-8");
-			Iterator<Pacman> pacmans = ap.iterator();
-			Iterator<Fruit> fruits = af.iterator();
-			pw.append("Type,id,Lat,Lon,Alt,Speed/Weight,Radius," + ap.size() + "," + af.size() +"\n");
-			int i =0;
-			while(pacmans.hasNext()) {
-				//running with iterator all over the Pacmans and fell the data
-				Pacman temp = pacmans.next();
-				pw.append(temp.getType() + "," + i+ "," +temp.getGps().x()+ "," +temp.getGps().y()+ "," 
-						+temp.getGps().z()+ "," + temp.getSpeed()+ "," +temp.getRadius() + "\n");
-				pw.flush();
-				i++;
-			}
-			int j =0;
-			while(fruits.hasNext()) {
-				//running with iterator all over the Fruits and fell the data
-				Fruit temp = fruits.next();
-				pw.append(temp.getType() + "," + j+ "," +temp.getGps().x()+ "," +temp.getGps().y()+ "," 
-						+temp.getGps().z()+ "," + temp.getWeight()+ "\n");
-				pw.flush();
-				j++;
-			}
-
-			pw.flush();
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		System.out.println("DONE");
+	public Myplayer getMyplayer() {
+		return myplayer;
 	}
-
-
+	public void setMyplayer(Myplayer myplayer) {
+		this.myplayer = myplayer;
+	}
+	
+	public ArrayList<Box> getBoxes() {
+		return boxes;
+	}
+	public void setBoxes(ArrayList<Box> boxes) {
+		this.boxes = boxes;
+	}
+	public ArrayList<Ghost> getGhosts() {
+		return ghosts;
+	}
+	public void setGhosts(ArrayList<Ghost> ghosts) {
+		this.ghosts = ghosts;
+	}
 	public ArrayList<Pacman> getAp() {
 		return ap;
 	}
@@ -145,17 +129,25 @@ public class Game implements Runnable {
 	}
 	/**
 	 * Constructor
-	 * @param ap array list of Pacmans
-	 * @param af array list of Fruits
+	 * @param ap array list of Pacman
+	 * @param af array list of Fruit
+	 * @param boxes array list of Box
+	 * @param ghosts array list of Ghost
+	 * @param myplayer a new main player
+	 * 
 	 */
-	public Game(ArrayList<Pacman> ap, ArrayList<Fruit> af) {
+
+	public Game(Myplayer myplayer ,ArrayList<Pacman> ap, ArrayList<Fruit> af, ArrayList<Box> boxes, ArrayList<Ghost> ghosts) {
+		this.myplayer = myplayer;
 		this.ap = ap;
 		this.af = af;
+		this.boxes = boxes;
+		this.ghosts = ghosts;
 	}
-
 	@Override
 	public String toString() {
-		return "Game [ap=" + ap + ", af=" + af + "]";
+		return "Game [myplayer=" + myplayer + ", ap=" + ap + ", af=" + af + ", boxes=" + boxes + ", ghosts=" + ghosts
+				+ "]";
 	}
 
 	@Override
