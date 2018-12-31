@@ -2,7 +2,7 @@ package Threads;
 
 import java.util.ArrayList;
 import GIS.Game;
-import GIS.ShortestPathAlgo;
+import GIS.Direction;
 import GUI.MyFrame;
 
 /**
@@ -33,7 +33,7 @@ public class MyThread extends Thread {
 	 */
 	public void run() {
 		
-		ShortestPathAlgo SPA = new ShortestPathAlgo();
+		Direction SPA = new Direction();
 		//calculate when the loop starts
 		long startTime =System.nanoTime();
 		while(game.getAf().size()!=0) {

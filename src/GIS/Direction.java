@@ -23,7 +23,6 @@ public class Direction {
 		return game;
 	}
 
-	
 	public double direction(ArrayList<String> board) {
 		MyCoords mc = new MyCoords();
 		Myplayer myplayer = game.getMyplayer();
@@ -50,7 +49,6 @@ public class Direction {
 		if(type == 'F') {
 			double[] angles =mc.azimuth_elevation_dist(myplayer.getGps(), game.getAf().get(minIndex).getGps());
 			teta = angles[0];
-
 		}
 		else {
 			double[] angles =mc.azimuth_elevation_dist(myplayer.getGps(), game.getAp().get(minIndex).getGps());
@@ -59,5 +57,4 @@ public class Direction {
 		
 		return teta;
 	}
-
 }
