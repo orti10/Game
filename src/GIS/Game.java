@@ -142,6 +142,7 @@ public class Game implements Runnable {
 					myplayer.setGps(new Point3D(Double.parseDouble(s[2]),Double.parseDouble(s[3]),Double.parseDouble(s[4])));
 					Pixel pixel = m.getXYfromLatLon(myplayer.getGps().get_x(), myplayer.getGps().get_y());
 					myplayer.setPix(pixel);
+					myplayer.setSpeed(Double.parseDouble(s[5]));
 				}
 			}	
 	}
