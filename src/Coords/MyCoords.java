@@ -61,7 +61,6 @@ public class MyCoords implements coords_converter {
 
 		double y=Math.sin(g1r_y-g0r_y)*Math.cos(g1r_x);
 		double x=Math.cos(g0r_x)*Math.sin(g1r_x)-(Math.sin(g0r_x)*Math.cos(g1r_x)*Math.cos(g0r_y-g0r_y));
-
 		double teta=Math.atan2(y, x);
 		teta = Math.toDegrees(teta);
 		if(teta<0) {
@@ -74,6 +73,8 @@ public class MyCoords implements coords_converter {
 
 		return arry;
 	}
+	
+	
 	/**
 	 *@param p point3D
 	 *@return true if the coordinates of a given point on earth are valid

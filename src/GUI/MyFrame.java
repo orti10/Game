@@ -9,6 +9,7 @@ import java.io.File;
 import javax.swing.filechooser.*;
 
 import GIS.Box;
+import GIS.Direction;
 import GIS.Fruit;
 import GIS.Game;
 import GIS.Ghost;
@@ -190,16 +191,17 @@ public class MyFrame extends JFrame {
 //				MyThread t = new MyThread(MyFrame.this,game);
 //				t.start();
 				//link to MyThread
-				play1.start();
+				
+				play1.start();				
+				Direction dir = new Direction(game);
 				if(play1.isRuning()) {
 					System.out.println(play1.getBoard());
 					game = new Game();
 					game.ReadBoard(play1.getBoard());
-					play1.rotate(90);
-					System.out.println(game);
+					play1.rotate(dir.direction(play1.getBoard()));
+					System.out.println(dir.direction(play1.getBoard()));
 					repaint();
 				}
-				
 			}
 		});
 	}
