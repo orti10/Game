@@ -103,34 +103,9 @@ public class MyFrame extends JFrame {
 					String fi=f.getPath();
 					
 					if(fi!=null) {
-						play1 = new Play(fi);
-						game.ReadBoard(play1.getBoard());
-						Map m = new Map();
-
-						ArrayList<Fruit> sf = game.getAf();
-						for(int i =0; i < game.getAf().size(); i++) {
-							Pixel pixel = m.getXYfromLatLon(sf.get(i).getGps().get_x(), sf.get(i).getGps().get_y());
-							sf.get(i).setPix(pixel);
-						}
-						ArrayList<Pacman> sp = game.getAp();
-
-						for(int i =0; i < game.getAp().size(); i++) {
-							Pixel pixel = m.getXYfromLatLon(sp.get(i).getGps().get_x(), sp.get(i).getGps().get_y());
-							sp.get(i).setPix(pixel);
-						}	
-						ArrayList<Box> boxes= game.getBoxes();
-
-						for(int i =0; i < game.getBoxes().size(); i++) {
-							Pixel pixel1 = m.getXYfromLatLon(boxes.get(i).getGps1().get_x(), boxes.get(i).getGps1().get_y());
-							Pixel pixel2 = m.getXYfromLatLon(boxes.get(i).getGps2().get_x(), boxes.get(i).getGps2().get_y());
-							boxes.get(i).setPix1(pixel1);
-							boxes.get(i).setPix2(pixel2);
-						}	
-						ArrayList<Ghost> ghosts = game.getGhosts();
-						for(int i =0; i < game.getGhosts().size(); i++) {
-							Pixel pixel = m.getXYfromLatLon(ghosts.get(i).getGps().get_x(), ghosts.get(i).getGps().get_y());
-							ghosts.get(i).setPix(pixel);
-						}	
+						play1  = new Play(fi);
+						play1.setIDs(205672538,312485147,309612307);
+						game.ReadCsv(fi);	
 						repaint();
 					}
 				}
@@ -163,6 +138,7 @@ public class MyFrame extends JFrame {
 						player.setGps(gps);
 						player.setPix(pix);
 						game.setMyplayer(player);
+						play1.setInitLocation(player.getGps().get_x(),player.getGps().get_y());
 						repaint();	
 						removeMouseListener(this);
 					}
@@ -214,8 +190,16 @@ public class MyFrame extends JFrame {
 //				MyThread t = new MyThread(MyFrame.this,game);
 //				t.start();
 				//link to MyThread
-				ArrayList<String> s = play1.getBoard();
-				System.out.println(s.get(15));
+				play1.start();
+				if(play1.isRuning()) {
+					System.out.println(play1.getBoard());
+					game = new Game();
+					game.ReadBoard(play1.getBoard());
+					play1.rotate(90);
+					System.out.println(game);
+					repaint();
+				}
+				
 			}
 		});
 	}
@@ -227,6 +211,7 @@ public class MyFrame extends JFrame {
  */
 	public void paint(Graphics g)
 	{
+	
 		this.setJMenuBar(getJMenuBar());
 		super.paint(g);
 		Graphics2D g2 = (Graphics2D) g;
@@ -261,6 +246,7 @@ public class MyFrame extends JFrame {
 		for (Ghost ghost : game.getGhosts()) {
 			g2.drawImage(ghostIcon,(int)ghost.getPix().getX(), (int)ghost.getPix().getY(),null);
 		}
+		
 
 		Proportionsize ( w , h);
 	}

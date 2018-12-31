@@ -1,6 +1,11 @@
 package GIS;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import Geom.Pixel;
 import Geom.Point3D;
 /**
  * 
@@ -26,10 +31,18 @@ public class Game implements Runnable {
 	 * @param csvFile
 	 * @return game full of readen data
 	 */
-	public void ReadBoard(ArrayList<String> board) {
-	
-			for (int i=0;i < board.size(); i++) { 
-				String[] s = board.get(i).split(","); 
+	public void ReadCsv(String csvFile) {
+		BufferedReader br = null;
+		String line = "";
+		Map m = new Map();
+		try {
+			//Reads from the csv file
+			br = new BufferedReader(new FileReader(csvFile)); 
+			line=br.readLine(); 
+			//Progressing while we have a next line to read
+			while ((line = br.readLine()) != null) { 
+			
+				String[] s =line.split(","); 
 				
 				if(s[0].contains("P")) {
 					Pacman pac = new Pacman();
@@ -37,6 +50,8 @@ public class Game implements Runnable {
 					pac.setGps(new Point3D(Double.parseDouble(s[2]),Double.parseDouble(s[3]),Double.parseDouble(s[4])));
 					pac.setSpeed(Double.parseDouble(s[5]));
 					pac.setRadius(Double.parseDouble(s[6]));
+					Pixel pixel = m.getXYfromLatLon(pac.getGps().get_x(), pac.getGps().get_y());
+					pac.setPix(pixel);
 					this.ap.add(pac);
 				}
 				else if (s[0].contains("F")){
@@ -44,13 +59,19 @@ public class Game implements Runnable {
 					f.setId(Integer.parseInt(s[1]));
 					f.setGps(new Point3D(Double.parseDouble(s[2]),Double.parseDouble(s[3]),Double.parseDouble(s[4])));
 					f.setWeight(Double.parseDouble(s[5]));
+					Pixel pixel = m.getXYfromLatLon(f.getGps().get_x(), f.getGps().get_y());
+					f.setPix(pixel);
 					this.af.add(f);
-				}
+					}
 				else if (s[0].contains("B")){
 					Box box = new Box();
 					box.setId(Integer.parseInt(s[1]));
 					box.setGps1(new Point3D(Double.parseDouble(s[2]),Double.parseDouble(s[3]),Double.parseDouble(s[4])));
 					box.setGps2(new Point3D(Double.parseDouble(s[5]),Double.parseDouble(s[6]),Double.parseDouble(s[7])));
+					Pixel pixel1 = m.getXYfromLatLon(box.getGps1().get_x(), box.getGps1().get_y());
+					Pixel pixel2 = m.getXYfromLatLon(box.getGps2().get_x(), box.getGps2().get_y());
+					box.setPix1(pixel1);
+					box.setPix2(pixel2);
 					this.boxes.add(box);
 					
 				}
@@ -58,11 +79,71 @@ public class Game implements Runnable {
 					Ghost ghost = new Ghost();
 					ghost.setId(Integer.parseInt(s[1]));
 					ghost.setGps(new Point3D(Double.parseDouble(s[2]),Double.parseDouble(s[3]),Double.parseDouble(s[4])));
+					Pixel pixel = m.getXYfromLatLon(ghost.getGps().get_x(), ghost.getGps().get_y());
+					ghost.setPix(pixel);
 					this.ghosts.add(ghost);
 
 				}
 			}
+		}
+			catch (IOException er) {
+				er.printStackTrace();
+			}
 
+	}
+	public void ReadBoard(ArrayList<String> board) {
+			Map m = new Map();
+			for (int i = 0; i < board.size(); i++) {
+			
+				String[] s =board.get(i).split(","); 
+				
+				if(s[0].contains("P")) {
+					Pacman pac = new Pacman();
+					pac.setId(Integer.parseInt(s[1]));
+					pac.setGps(new Point3D(Double.parseDouble(s[2]),Double.parseDouble(s[3]),Double.parseDouble(s[4])));
+					pac.setSpeed(Double.parseDouble(s[5]));
+					pac.setRadius(Double.parseDouble(s[6]));
+					Pixel pixel = m.getXYfromLatLon(pac.getGps().get_x(), pac.getGps().get_y());
+					pac.setPix(pixel);
+					this.ap.add(pac);
+				}
+				else if (s[0].contains("F")){
+					Fruit f = new Fruit();
+					f.setId(Integer.parseInt(s[1]));
+					f.setGps(new Point3D(Double.parseDouble(s[2]),Double.parseDouble(s[3]),Double.parseDouble(s[4])));
+					f.setWeight(Double.parseDouble(s[5]));
+					Pixel pixel = m.getXYfromLatLon(f.getGps().get_x(), f.getGps().get_y());
+					f.setPix(pixel);
+					this.af.add(f);
+				}
+				else if (s[0].contains("B")){
+					Box box = new Box();
+					box.setId(Integer.parseInt(s[1]));
+					box.setGps1(new Point3D(Double.parseDouble(s[2]),Double.parseDouble(s[3]),Double.parseDouble(s[4])));
+					box.setGps2(new Point3D(Double.parseDouble(s[5]),Double.parseDouble(s[6]),Double.parseDouble(s[7])));
+					Pixel pixel1 = m.getXYfromLatLon(box.getGps1().get_x(), box.getGps1().get_y());
+					Pixel pixel2 = m.getXYfromLatLon(box.getGps2().get_x(), box.getGps2().get_y());
+					box.setPix1(pixel1);
+					box.setPix2(pixel2);
+					this.boxes.add(box);
+					
+				}
+				else if (s[0].contains("G")){
+					Ghost ghost = new Ghost();
+					ghost.setId(Integer.parseInt(s[1]));
+					ghost.setGps(new Point3D(Double.parseDouble(s[2]),Double.parseDouble(s[3]),Double.parseDouble(s[4])));
+					Pixel pixel = m.getXYfromLatLon(ghost.getGps().get_x(), ghost.getGps().get_y());
+					ghost.setPix(pixel);
+					this.ghosts.add(ghost);
+
+				}
+				else if (s[0].contains("M")){
+					myplayer.setId(Integer.parseInt(s[1]));
+					myplayer.setGps(new Point3D(Double.parseDouble(s[2]),Double.parseDouble(s[3]),Double.parseDouble(s[4])));
+					Pixel pixel = m.getXYfromLatLon(myplayer.getGps().get_x(), myplayer.getGps().get_y());
+					myplayer.setPix(pixel);
+				}
+			}	
 	}
 
 	public Myplayer getMyplayer() {
@@ -127,4 +208,5 @@ public class Game implements Runnable {
 		// TODO Auto-generated method stub
 
 	}
+	
 }

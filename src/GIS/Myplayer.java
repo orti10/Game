@@ -4,7 +4,8 @@ import Geom.Pixel;
 import Geom.Point3D;
 
 public class Myplayer {
-	
+	private String type;
+	private int id ;
 	private Point3D gps;
 	private double speed;
 	private double radius;
@@ -12,6 +13,8 @@ public class Myplayer {
 	private int score;
 	
 	public Myplayer() {
+		this.type = "M";
+		this.id = 1;
 		this.gps = new Point3D();
 		this.speed = 0;
 		this.radius = 0;
@@ -19,8 +22,9 @@ public class Myplayer {
 		this.score = 0;
 	}
 
-	public Myplayer(Point3D gps, double speed, double radius, Pixel pix, int score) {
-		super();
+	public Myplayer(String type,int id, Point3D gps, double speed, double radius, Pixel pix, int score) {
+		this.type = type;
+		this.id= id;
 		this.gps = gps;
 		this.speed = speed;
 		this.radius = radius;
@@ -30,8 +34,24 @@ public class Myplayer {
 
 	@Override
 	public String toString() {
-		return "Myplayer [gps=" + gps + ", speed=" + speed + ", radius=" + radius + ", pix=" + pix + ", score=" + score
-				+ "]";
+		return "Myplayer [type=" + type + ", id=" + id + ", gps=" + gps + ", speed=" + speed + ", radius=" + radius
+				+ ", pix=" + pix + ", score=" + score + "]";
+	}
+	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public Point3D getGps() {

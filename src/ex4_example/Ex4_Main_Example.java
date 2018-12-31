@@ -73,7 +73,6 @@ public class Ex4_Main_Example {
 		// 8) stop the server - not needed in the real implementation.
 		//play1.stop();
 		System.out.println("**** Done Game (user stop) ****");
-		
 		// 9) print the data & save to the course DB
 		String info = play1.getStatistics();
 		System.out.println(info);
