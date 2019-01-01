@@ -17,7 +17,7 @@ public class Graph_Ex{
 	
 	
 	
-	public double ShortPath(Game game) {
+	public void ShortPath(Game game) {
 		int size = game.getBoxes().size()*4;
 		double[] xx = new double[size];
 		double[] yy = new double[size];

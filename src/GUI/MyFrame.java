@@ -51,8 +51,8 @@ public class MyFrame extends JFrame {
 /** void method
  * @note This method controls the activation on the menu and create this response
  */
-	private void initGUI() 
-	{
+	private void initGUI() {
+		
 		JMenuBar menuBar = new JMenuBar();
 		JMenu file = new JMenu("Game"); 
 		JMenuItem clear = new JMenuItem("Clear");
