@@ -42,11 +42,9 @@ public class Direction {
 				type ='P';
 				minTime =(mc.distance3d(myplayer.getGps(),game.getAp().get(j).getGps()))/myplayer.getSpeed();
 				minIndex =j;
-
 			}
-
 		}
-
+		
 		if(type == 'F') {
 			double[] angles =mc.azimuth_elevation_dist(myplayer.getGps(), game.getAf().get(minIndex).getGps());
 			teta = angles[0];
@@ -55,12 +53,9 @@ public class Direction {
 			double[] angles =mc.azimuth_elevation_dist(myplayer.getGps(), game.getAp().get(minIndex).getGps());
 			teta = angles[0];
 		}
-		
-		while((myplayer.getPix().getY()- game.getBoxes().get(1).getPix1().getY()<2)) {
-			teta = 100;
+		if(myplayer.getPix().getY() - game.getBoxes().get(1).getPix1().getY()<3) {
+			teta = 90;
 		}
-		
-			
 		
 //		for (int i = 0; i < game.getBoxes().size() ; i++) {
 //			if(((myplayer.getPix().getX() > game.getBoxes().get(1).getPix1().getX()+50)

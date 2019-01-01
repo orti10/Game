@@ -188,20 +188,10 @@ public class MyFrame extends JFrame {
 		run.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				MyThread t = new MyThread(MyFrame.this,game);
-//				t.start();
-				//link to MyThread
 				
-				play1.start();				
-				Direction dir = new Direction(game);
-				if(play1.isRuning()) {
-					System.out.println(play1.getBoard());
-					game = new Game();
-					game.ReadBoard(play1.getBoard());
-					play1.rotate(dir.direction(play1.getBoard()));
-					System.out.println(dir.direction(play1.getBoard()));
-					repaint();
-				}
+				MyThread t = new MyThread(MyFrame.this,game,play1);
+				t.start();
+				//link to MyThread	
 			}
 		});
 	}

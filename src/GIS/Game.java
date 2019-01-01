@@ -19,6 +19,7 @@ public class Game implements Runnable {
 	private ArrayList<Fruit> af;
 	private ArrayList<Box> boxes;
 	private ArrayList<Ghost> ghosts;
+	
 	public Game() {
 		myplayer = new Myplayer();
 		ap = new ArrayList<Pacman>();
@@ -26,6 +27,7 @@ public class Game implements Runnable {
 		boxes = new ArrayList<Box>();
 		ghosts = new ArrayList<Ghost>();
 	}
+
 	/**
 	 * 
 	 * @param csvFile
