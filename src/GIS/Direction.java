@@ -53,6 +53,8 @@ public class Direction {
 			double[] angles =mc.azimuth_elevation_dist(myplayer.getGps(), game.getAp().get(minIndex).getGps());
 			teta = angles[0];
 		}
+		
+		
 		if(myplayer.getPix().getY() - game.getBoxes().get(1).getPix1().getY()<3) {
 			teta = 90;
 		}
