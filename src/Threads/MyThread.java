@@ -42,6 +42,7 @@ public class MyThread extends Thread {
 			//making sure that the pacmans are moving and the fruits are stable
 			game.getAf().clear();
 			game.getAp().clear();
+			game.getGhosts().clear();
 			game.ReadBoard(play1.getBoard());
 			double teta=dir.direction(play1.getBoard());
 			play1.rotate(teta);
@@ -49,8 +50,8 @@ public class MyThread extends Thread {
 			mf.repaint();
 
 			try {
-				sleep(100);
-				mf.repaint();
+				sleep(50);
+				
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

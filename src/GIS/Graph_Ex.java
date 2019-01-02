@@ -14,10 +14,8 @@ import graph.Point3D;
  *
  */
 public class Graph_Ex{
-	
-	
-	
-	public void ShortPath(Game game) {
+		
+	public ArrayList<String> ShortPath(Game game) {
 		int size = game.getBoxes().size()*4;
 		double[] xx = new double[size];
 		double[] yy = new double[size];
@@ -88,7 +86,6 @@ public class Graph_Ex{
 
 		// This is the main call for computing all the shortest path from node 0 ("a")
 		Graph_Algo.dijkstra(G, source);
-
 		Node b = G.getNodeByName(target);
 		System.out.println("***** Graph Demo for OOP_Ex4 *****");
 		System.out.println(b);
@@ -97,5 +94,9 @@ public class Graph_Ex{
 		for(int i=0;i<shortestPath.size();i++) {
 			System.out.print(","+shortestPath.get(i));
 		}
+	//	shortestPath.toArray();
+		
+		return shortestPath ;
 	}
 }
+	

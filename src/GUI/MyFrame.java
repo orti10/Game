@@ -205,8 +205,6 @@ public class MyFrame extends JFrame {
 	{
 	
 		this.setJMenuBar(getJMenuBar());
-		super.paint(g);
-		Graphics2D g2 = (Graphics2D) g;
 	
 		try {
 		
@@ -219,27 +217,24 @@ public class MyFrame extends JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		g2.drawImage(myImage , -8,-8,this.getWidth(),this.getHeight(), null);
-		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
+		g.drawImage(myImage , -8,-8,this.getWidth(),this.getHeight(), null);
 		
-		g2.drawImage(MyplayerIcon,(int)game.getMyplayer().getPix().getX(),(int) game.getMyplayer().getPix().getY(),null);	
+		g.drawImage(MyplayerIcon,(int)game.getMyplayer().getPix().getX(),(int) game.getMyplayer().getPix().getY(),null);	
 
 		for (Pacman p : game.getAp()) {
-			g2.drawImage(packmanIcon,(int) p.getPix().getX(), (int) p.getPix().getY(),null);	
+			g.drawImage(packmanIcon,(int) p.getPix().getX(), (int) p.getPix().getY(),null);	
 		}
 		for (Fruit f : game.getAf()) {
-			g2.drawImage(fruitIcon,(int) f.getPix().getX(), (int) f.getPix().getY(),null);	
+			g.drawImage(fruitIcon,(int) f.getPix().getX(), (int) f.getPix().getY(),null);	
 		}
 		for (Box box : game.getBoxes()) {
-			g2.setColor(Color.black);
-			g2.fillRect((int)box.getPix1().getX(),(int)box.getPix2().getY(), (int)(box.getPix2().getX()-box.getPix1().getX()), (int)(box.getPix1().getY()-box.getPix2().getY()));	
+			g.setColor(Color.black);
+			g.fillRect((int)box.getPix1().getX(),(int)box.getPix2().getY(), (int)(box.getPix2().getX()-box.getPix1().getX()), (int)(box.getPix1().getY()-box.getPix2().getY()));	
 		}
 		for (Ghost ghost : game.getGhosts()) {
-			g2.drawImage(ghostIcon,(int)ghost.getPix().getX(), (int)ghost.getPix().getY(),null);
+			g.drawImage(ghostIcon,(int)ghost.getPix().getX(), (int)ghost.getPix().getY(),null);
 		}
 		
-
 		Proportionsize ( w , h);
 	}
 	

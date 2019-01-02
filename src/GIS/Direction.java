@@ -39,8 +39,8 @@ public class Direction {
 	public double direction(ArrayList<String> board) {
 		MyCoords mc = new MyCoords();
 		Myplayer myplayer = game.getMyplayer();
-		double w = 1386;
-		double h = 732;
+		double w = 1386;//x
+		double h = 732;//y
 		int minIndex =0;
 		char type ='F';
 		double teta =0;
@@ -62,52 +62,46 @@ public class Direction {
 		if(type == 'F') {
 			double[] angles =mc.azimuth_elevation_dist(myplayer.getGps(), game.getAf().get(minIndex).getGps());
 			teta = angles[0];
-			//			Point3D ff= new Point3D(game.getAf().get(minIndex).getGps().get_x(), game.getAf().get(minIndex).getGps().get_y());
-			//			graph.ShortPath(game,ff);
 		}
 		else {
 			double[] angles =mc.azimuth_elevation_dist(myplayer.getGps(), game.getAp().get(minIndex).getGps());
 			teta = angles[0];
-			//			Point3D fp= new Point3D(game.getAp().get(minIndex).getGps().get_x(), game.getAp().get(minIndex).getGps().get_y());
-			//			graph.ShortPath(game,fp);
 		}
-		//touch with box (limit)
-		if(myplayer.getPix().getY() - game.getBoxes().get(1).getPix1().getY()<3) {
-			if(myplayer.getPix().distance(game.getBoxes().get(1).getPix1())
-					>myplayer.getPix().distance(game.getBoxes().get(1).getPix2())) {
-				teta=90;
-				if(myplayer.getPix().getX()>game.getBoxes().get(1).getPix2().getX()) {
-					teta=0;
-					System.out.println("mpY : "+myplayer.getPix().getY());
-					System.out.println("Y--- : "+game.getBoxes().get(1).getPix2().getY());
-				//err
-					if(myplayer.getPix().getY()<game.getBoxes().get(1).getPix2().getY()) {
+
+		for (int i = 0; i < game.getBoxes().size(); i++) {
+			
+			if(((Math.abs(myplayer.getPix().getY() - game.getBoxes().get(i).getPix1().getY())<3) ||
+					(Math.abs(myplayer.getPix().getY() - game.getBoxes().get(i).getPix2().getY())<3)) 
+					&& 
+					((Math.abs(myplayer.getPix().getX() - game.getBoxes().get(i).getPix1().getX())<3) ||
+					(Math.abs(myplayer.getPix().getX() - game.getBoxes().get(i).getPix2().getX())<3))){
+
+				//touch with box i (moving y limit)
+				if(Math.abs(myplayer.getPix().getY() - game.getBoxes().get(i).getPix1().getY())<3 ||
+						(Math.abs(myplayer.getPix().getY() - game.getBoxes().get(i).getPix2().getY())<3)) {
+
+					if(myplayer.getPix().distance(game.getBoxes().get(i).getPix1())
+							>=myplayer.getPix().distance(game.getBoxes().get(i).getPix2())) {
+						teta=90;
+					}
+					else {
 						teta=270;
+					}	
+				}
+				//touch with box i (moving x limit) 
+				if(Math.abs(myplayer.getPix().getX() - game.getBoxes().get(i).getPix1().getX())<3||
+						(Math.abs(myplayer.getPix().getX() - game.getBoxes().get(i).getPix2().getX())<3)) {
+
+					if(myplayer.getPix().distance(game.getBoxes().get(i).getPix2())
+							>=myplayer.getPix().distance(game.getBoxes().get(i).getPix1())) {
+						teta=0;
+					}
+					else {
+						teta=180;
 					}
 				}
 			}
 		}
-
-		//				if(myplayer.getPix().getY() > h && myplayer.getPix().getX() > w) {
-		//					
-		//				}
-
-
-		//		for (int i = 0; i < game.getBoxes().size() ; i++) {
-		//			if(((myplayer.getPix().getX() > game.getBoxes().get(1).getPix1().getX()+50)
-		//					&& (myplayer.getPix().getX() < game.getBoxes().get(1).getPix2().getX()-50)) 
-		//					||
-		//					(myplayer.getPix().getY() > game.getBoxes().get(1).getPix1().getY()-50) 
-		//					&& (myplayer.getPix().getY() < game.getBoxes().get(1).getPix2().getY()+50)){
-		//				System.out.println("First if");
-		//
-		//			}
-		//			else {
-		//
-		//				System.out.println("seconde if");
-		//				teta = teta +10;
-		//			}
-		//		}
 		return teta;
 	}
 }
