@@ -190,19 +190,13 @@ public class MyFrame extends JFrame {
 		runAuto.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				addMouseListener(new MouseAdapter() {
-					public void mouseClicked(MouseEvent arg) {
+				
 						//link to MyThread	
 
 						MyThread t = new MyThread(MyFrame.this,game,play1,null);
 						t.start();
-						arg.getX();
-						arg.getY();
 					}
 				});
-
-			}
-		});
 
 		runMouse.addActionListener(new ActionListener() {
 			@Override
