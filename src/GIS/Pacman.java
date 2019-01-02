@@ -17,7 +17,6 @@ public class Pacman {
 	private double radius;
 	private Color color =Color.yellow;
 	private Pixel pix;
-	private Path path;
 	private double score;
 
 	public Pacman() {
@@ -27,18 +26,16 @@ public class Pacman {
 		this.speed=1;
 		this.radius=1;
 		this.pix=new Pixel();
-		this.path=new Path();
 		this.score =0;
 	}
 
-	public Pacman(String type, int id, Point3D gps, int speed, double radius, Pixel pix, Path path, int score) {
+	public Pacman(String type, int id, Point3D gps, double speed, double radius, Pixel pix, double score) {
 		this.type = type;
 		this.id = id;
 		this.gps = gps;
 		this.speed = speed;
 		this.radius = radius;
 		this.pix = pix;
-		this.path = path;
 		this.score =score;
 	}
 
@@ -94,14 +91,6 @@ public class Pacman {
 		this.pix = pix;
 	}
 
-	public Path getPath() {
-		return path;
-	}
-
-	public void setPath(Path path) {
-		this.path = path;
-	}
-
 	public double getScore() {
 		return score;
 	}
@@ -113,7 +102,7 @@ public class Pacman {
 	@Override
 	public String toString() {
 		return "Pacman [type=" + type + ", id=" + id + ", gps=" + gps + ", speed=" + speed + ", radius=" + radius
-				+ ", color=" + color + ", pix=" + pix + ", path=" + path + ", score=" + score + "]";
+				+ ", color=" + color + ", pix=" + pix + ", score=" + score + "]";
 
 	}
 }

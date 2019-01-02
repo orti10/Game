@@ -9,24 +9,32 @@ public class Ghost {
 	private int id;
 	private Point3D gps;
 	private Pixel pix;
+	private double speed;
+	private double radius;
+
+	
 
 	public Ghost() {
 		this.type ="G";
 		this.id=0;
 		this.gps=new Point3D();
 		this.pix=new Pixel(); 
+		this.speed=0;
+		this.radius=0;
 	}
 
-	public Ghost(String type, int id, Point3D gps, Pixel pix) {
+	public Ghost(String type, int id, Point3D gps, Pixel pix,double speed,double radius) {
 		this.type = type;
 		this.id = id;
 		this.gps = gps;
 		this.pix = pix;
+		this.speed = speed;
+		this.radius = radius;
 	}
 
 	@Override
 	public String toString() {
-		return "Ghost [type=" + type + ", id=" + id + ", gps=" + gps + ", pix=" + pix + "]";
+		return "Ghost [type=" + type + ", id=" + id + ", gps=" + gps + ", pix=" + pix + "speed="+speed+"radius="+radius+"]";
 	}
 
 	public String getType() {
@@ -60,6 +68,20 @@ public class Ghost {
 	public void setPix(Pixel pix) {
 		this.pix = pix;
 	}
-	
-	
+
+	public double getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(double speed) {
+		this.speed = speed;
+	}
+
+	public double getRadius() {
+		return radius;
+	}
+
+	public void setRadius(double radius) {
+		this.radius = radius;
+	}
 }

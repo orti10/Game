@@ -72,7 +72,7 @@ public class Direction {
 			
 			if(((Math.abs(myplayer.getPix().getY() - game.getBoxes().get(i).getPix1().getY())<3) ||
 					(Math.abs(myplayer.getPix().getY() - game.getBoxes().get(i).getPix2().getY())<3)) 
-					&& 
+					|| 
 					((Math.abs(myplayer.getPix().getX() - game.getBoxes().get(i).getPix1().getX())<3) ||
 					(Math.abs(myplayer.getPix().getX() - game.getBoxes().get(i).getPix2().getX())<3))){
 
@@ -82,9 +82,11 @@ public class Direction {
 
 					if(myplayer.getPix().distance(game.getBoxes().get(i).getPix1())
 							>=myplayer.getPix().distance(game.getBoxes().get(i).getPix2())) {
+						System.out.println("right");
 						teta=90;
 					}
 					else {
+						System.out.println("left");
 						teta=270;
 					}	
 				}
@@ -94,10 +96,12 @@ public class Direction {
 
 					if(myplayer.getPix().distance(game.getBoxes().get(i).getPix2())
 							>=myplayer.getPix().distance(game.getBoxes().get(i).getPix1())) {
-						teta=0;
+						System.out.println("down");
+						teta=180;
 					}
 					else {
-						teta=180;
+						System.out.println("up");
+						teta=0;
 					}
 				}
 			}

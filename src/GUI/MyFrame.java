@@ -38,7 +38,7 @@ public class MyFrame extends JFrame {
 	public BufferedImage myImage ,packmanIcon ,fruitIcon,ghostIcon,MyplayerIcon;
 	private Game game = new Game();
 	private Play play1 = new Play();
-	
+
 	private double w = 1386;
 	private double h = 732;
 
@@ -48,11 +48,11 @@ public class MyFrame extends JFrame {
 	public MyFrame() {
 		initGUI();	
 	}
-/** void method
- * @note This method controls the activation on the menu and create this response
- */
+	/** void method
+	 * @note This method controls the activation on the menu and create this response
+	 */
 	private void initGUI() {
-		
+
 		JMenuBar menuBar = new JMenuBar();
 		JMenu file = new JMenu("Game"); 
 		JMenuItem clear = new JMenuItem("Clear");
@@ -63,7 +63,9 @@ public class MyFrame extends JFrame {
 		JMenuItem myplayer = new JMenuItem("myplayer");
 		JMenuItem pacman = new JMenuItem("Pacman");
 		JMenuItem fruit = new JMenuItem("Fruit");
-		JMenuItem run = new JMenuItem("Run");
+		JMenuItem runAuto = new JMenuItem("RunAuto");
+		JMenuItem runMouse = new JMenuItem("RunMouse");
+
 
 		menuBar.add(file);
 		file.add(clear); 
@@ -73,13 +75,13 @@ public class MyFrame extends JFrame {
 		input.add(myplayer);
 		input.add(pacman); 
 		input.add(fruit); 
-		input.add(run); 
-		
+		input.add(runAuto); 
+		input.add(runMouse); 
+
 		//if the user wants to use a shortcuts on the keyboard
 		clear.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,  ActionEvent.CTRL_MASK));
 		open.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,  ActionEvent.CTRL_MASK));
 		exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,  ActionEvent.CTRL_MASK));
-		run.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,  ActionEvent.CTRL_MASK));
 
 		this.setJMenuBar(menuBar);
 		try {
@@ -98,11 +100,11 @@ public class MyFrame extends JFrame {
 				fs.setDialogTitle("Open a File");
 				fs.setFileFilter(new FileNameExtensionFilter("csv file","csv"));
 				int result=fs.showOpenDialog(null);
-				
+
 				if(result==JFileChooser.APPROVE_OPTION) {
 					File f=fs.getSelectedFile();
 					String fi=f.getPath();
-					
+
 					if(fi!=null) {
 						play1  = new Play(fi);
 						play1.setIDs(205672538,312485147,309612307);
@@ -185,29 +187,50 @@ public class MyFrame extends JFrame {
 
 		//if the user wants to run the game
 		//using Thread to make the moves to be on the same time when the game is running
-		run.addActionListener(new ActionListener() {
+		runAuto.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				MyThread t = new MyThread(MyFrame.this,game,play1);
-				t.start();
-				//link to MyThread	
+				addMouseListener(new MouseAdapter() {
+					public void mouseClicked(MouseEvent arg) {
+						//link to MyThread	
+
+						MyThread t = new MyThread(MyFrame.this,game,play1,null);
+						t.start();
+						arg.getX();
+						arg.getY();
+					}
+				});
+
+			}
+		});
+
+		runMouse.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				addMouseListener(new MouseAdapter() {
+					public void mouseClicked(MouseEvent arg) {
+						//link to MyThread	
+						Point3D mouse = new Point3D(arg.getX(),arg.getY());
+						MyThread t = new MyThread(MyFrame.this,game,play1,mouse);
+						t.start();
+					}
+				});
 			}
 		});
 	}
-/**
- * @param Graphics g
- * @note This void method creating the frame with pacmans and fruits , 
- * the size of them and how they will be represented on the frame.
- * keeps proportion of the screen when the user moves it using "Proportion" method.
- */
+	/**
+	 * @param Graphics g
+	 * @note This void method creating the frame with pacmans and fruits , 
+	 * the size of them and how they will be represented on the frame.
+	 * keeps proportion of the screen when the user moves it using "Proportion" method.
+	 */
 	public void paint(Graphics g)
 	{
-	
+
 		this.setJMenuBar(getJMenuBar());
-	
+
 		try {
-		
+
 			packmanIcon =ImageIO.read(new File("Icons/pacman.png"));
 			fruitIcon =ImageIO.read(new File("Icons/fruit.png"));
 			ghostIcon =ImageIO.read(new File("Icons/ghost.png"));
@@ -218,7 +241,7 @@ public class MyFrame extends JFrame {
 			e.printStackTrace();
 		}
 		g.drawImage(myImage , -8,-8,this.getWidth(),this.getHeight(), null);
-		
+
 		g.drawImage(MyplayerIcon,(int)game.getMyplayer().getPix().getX(),(int) game.getMyplayer().getPix().getY(),null);	
 
 		for (Pacman p : game.getAp()) {
@@ -234,17 +257,17 @@ public class MyFrame extends JFrame {
 		for (Ghost ghost : game.getGhosts()) {
 			g.drawImage(ghostIcon,(int)ghost.getPix().getX(), (int)ghost.getPix().getY(),null);
 		}
-		
+
 		Proportionsize ( w , h);
 	}
-	
-/**
- * 
- * @param w width of screen
- * @param h height of screen
- * 
- * @note this void method calculate the proportion size of the screen.
- */
+
+	/**
+	 * 
+	 * @param w width of screen
+	 * @param h height of screen
+	 * 
+	 * @note this void method calculate the proportion size of the screen.
+	 */
 	public void Proportionsize ( double w , double h) {
 
 		for (Pacman p1 : game.getAp()) {
@@ -292,7 +315,7 @@ public class MyFrame extends JFrame {
 	}
 	public void mouseReleased(MouseEvent arg0) {
 	}
-	
+
 	public static void main(String[] args){
 
 		MyFrame mf = new MyFrame();

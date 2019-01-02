@@ -30,7 +30,7 @@ public class Fruit {
 		this.timeMet=0;
 	}
 
-	public Fruit(String type, int id, Point3D gps, int weight , Pixel pix,String currentTime, double timeMet ) {
+	public Fruit(String type, int id, Point3D gps, double weight , Pixel pix,String currentTime, double timeMet ) {
 		this.type = type;
 		this.id = id;
 		this.gps = gps;
