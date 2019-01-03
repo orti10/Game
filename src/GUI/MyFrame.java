@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.File;
 import javax.swing.filechooser.*;
-
 import GIS.Box;
 import GIS.Direction;
 import GIS.Fruit;
@@ -38,6 +37,8 @@ public class MyFrame extends JFrame {
 	public BufferedImage myImage ,packmanIcon ,fruitIcon,ghostIcon,MyplayerIcon;
 	private Game game = new Game();
 	private Play play1 = new Play();
+	private Map m = new Map();
+
 
 	private double w = 1386;
 	private double h = 732;
@@ -61,8 +62,6 @@ public class MyFrame extends JFrame {
 
 		JMenu input = new JMenu("Input"); 
 		JMenuItem myplayer = new JMenuItem("myplayer");
-		JMenuItem pacman = new JMenuItem("Pacman");
-		JMenuItem fruit = new JMenuItem("Fruit");
 		JMenuItem runAuto = new JMenuItem("RunAuto");
 		JMenuItem runMouse = new JMenuItem("RunMouse");
 
@@ -73,11 +72,9 @@ public class MyFrame extends JFrame {
 		file.add(exit); 
 		menuBar.add(input);
 		input.add(myplayer);
-		input.add(pacman); 
-		input.add(fruit); 
 		input.add(runAuto); 
 		input.add(runMouse); 
-
+		
 		//if the user wants to use a shortcuts on the keyboard
 		clear.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,  ActionEvent.CTRL_MASK));
 		open.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,  ActionEvent.CTRL_MASK));
@@ -148,63 +145,26 @@ public class MyFrame extends JFrame {
 				});
 			}
 		});
-		//if the user wants to create the new pacman
-		pacman.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				addMouseListener(new MouseAdapter() {
-					public void mouseClicked(MouseEvent arg) {
-						Map m = new Map();
-						Pacman p = new Pacman();
-						Pixel pix =new Pixel(arg.getX(), arg.getY());
-						Point3D gps = new Point3D(m.getLatLonfromXY(pix));
-						p.setGps(gps);
-						p.setPix(pix);
-						game.getAp().add(p);
-						repaint();	
-						removeMouseListener(this);
-					}
-				});
-			}
-		});
-		//if the user wants to create the new fruit
-		fruit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				addMouseListener(new MouseAdapter() {
-					public void mouseClicked(MouseEvent arg) {
-						Map m = new Map();
-						Fruit f = new Fruit();
-						Pixel pix =new Pixel(arg.getX(), arg.getY());
-						Point3D gps = new Point3D(m.getLatLonfromXY(pix));
-						f.setGps(gps);
-						f.setPix(pix );
-						game.getAf().add(f);
-						repaint();	
-						removeMouseListener(this);
-					}
-				});
-			}
-		});
 
 		//if the user wants to run the game
 		//using Thread to make the moves to be on the same time when the game is running
 		runAuto.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-						//link to MyThread	
-
-						MyThread t = new MyThread(MyFrame.this,game,play1,null);
-						t.start();
-					}
-				});
+				//link to MyThread	
+				MyThread t = new MyThread(MyFrame.this,game,play1,null);
+				t.start();
+			}
+		});
 
 		runMouse.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent arg) {
-						//link to MyThread	
-						Point3D mouse = new Point3D(arg.getX(),arg.getY());
+						//link to MyThread
+						Pixel click = new Pixel(arg.getX(),arg.getY());
+						Point3D mouse = new Point3D(m.getLatLonfromXY(click));
 						MyThread t = new MyThread(MyFrame.this,game,play1,mouse);
 						t.start();
 					}
@@ -212,6 +172,7 @@ public class MyFrame extends JFrame {
 			}
 		});
 	}
+
 	/**
 	 * @param Graphics g
 	 * @note This void method creating the frame with pacmans and fruits , 

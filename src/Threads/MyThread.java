@@ -1,10 +1,15 @@
 package Threads;
 
 import GIS.Game;
+
+import java.awt.event.MouseEvent;
+
+import Coords.Map;
 import Coords.MyCoords;
 import GIS.Direction;
 import GUI.MyFrame;
 import Robot.Play;
+import Geom.Pixel;
 import Geom.Point3D;
 
 /**
@@ -17,8 +22,8 @@ public class MyThread extends Thread {
 	private Game game;
 	private MyFrame mf;
 	private Play play1;
-	private Point3D mouse=new Point3D();
-	private MyCoords mc;
+	private Point3D mouse;
+	private Map m;
 
 
 	/**
@@ -41,11 +46,13 @@ public class MyThread extends Thread {
 	 * using to find the shortest and the fastest path for each pacman on the board 
 	 * and moves then on the same time.
 	 */
-	@SuppressWarnings("static-access")
+
 	public void run() {
 
 		play1.start();	
-		Direction dir = new Direction(game);		
+		Direction dir = new Direction(game);
+		MyCoords mc = new MyCoords ();
+		
 		while(play1.isRuning()) {
 			//making sure that the pacmans are moving and the fruits are stable
 			if(mouse==null) {
@@ -56,29 +63,25 @@ public class MyThread extends Thread {
 			double teta=dir.direction(play1.getBoard());
 			play1.rotate(teta);
 			mf.repaint();
-			}
-			
+			}	
 			else if(mouse!=null) {
-				System.out.println(mouse);
 				game.getAf().clear();
 				game.getAp().clear();
 				game.getGhosts().clear();
 				game.ReadBoard(play1.getBoard());
-				double[] asd = mc.azimuth_elevation_dist(game.getMyplayer().getGps(),mouse );
-				double teta =asd[0];
-				play1.rotate(teta);
+				double azimuth=mc.azimuth_elevation_dist(game.getMyplayer().getGps(), mouse)[0];
+				play1.rotate(azimuth);
 				mf.repaint();
 			}
-
 			try {
 				sleep(100);
 
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}
+			}	
 		}
-		mf.repaint();
+	mf.repaint();
 	}
 }
 //calculate when the loop ends
