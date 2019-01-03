@@ -7,6 +7,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.File;
 import javax.swing.filechooser.*;
+
+import Coords.MyCoords;
 import GIS.Box;
 import GIS.Direction;
 import GIS.Fruit;
@@ -38,6 +40,8 @@ public class MyFrame extends JFrame {
 	private Game game = new Game();
 	private Play play1 = new Play();
 	private Map m = new Map();
+	private MyThread thread;
+	MyCoords mc = new MyCoords ();
 
 
 	private double w = 1386;
@@ -74,7 +78,7 @@ public class MyFrame extends JFrame {
 		input.add(myplayer);
 		input.add(runAuto); 
 		input.add(runMouse); 
-		
+
 		//if the user wants to use a shortcuts on the keyboard
 		clear.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,  ActionEvent.CTRL_MASK));
 		open.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,  ActionEvent.CTRL_MASK));
@@ -152,27 +156,39 @@ public class MyFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//link to MyThread	
-				MyThread t = new MyThread(MyFrame.this,game,play1,null);
+				MyThread t = new MyThread(MyFrame.this,game,play1);
 				t.start();
 			}
 		});
-
-		runMouse.addActionListener(new ActionListener() {
+		runMouse.addActionListener(new ActionListener() 
+		{		
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) 
+			{
+				thread = new MyThread(MyFrame.this,game,play1);
+				thread.start();	
+				
 				addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent arg) {
 						//link to MyThread
-						Pixel click = new Pixel(arg.getX(),arg.getY());
-						Point3D mouse = new Point3D(m.getLatLonfromXY(click));
-						MyThread t = new MyThread(MyFrame.this,game,play1,mouse);
-						t.start();
+						if(play1.isRuning()) {
+							Pixel click = new Pixel(arg.getX(),arg.getY());
+							Point3D mouse = new Point3D(m.getLatLonfromXY(click));
+							
+							double degree = mc.azimuth_elevation_dist(game.getMyplayer().getGps(), mouse)[0];
+							thread.setDgree(degree);
+						}
+						if(!play1.isRuning()) {
+							Pixel click = new Pixel(arg.getX(),arg.getY());
+							//Point3D mouse = new Point3D(m.getLatLonfromXY(click));
+							Thread t = new MyThread(MyFrame.this,game,play1);
+							t.start();
+						}
 					}
 				});
 			}
 		});
 	}
-
 	/**
 	 * @param Graphics g
 	 * @note This void method creating the frame with pacmans and fruits , 
@@ -181,7 +197,6 @@ public class MyFrame extends JFrame {
 	 */
 	public void paint(Graphics g)
 	{
-
 		this.setJMenuBar(getJMenuBar());
 
 		try {
