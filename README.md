@@ -34,8 +34,6 @@ The player can load a .csv file.
 * Threads --> Standard thread. map
 
 Excample of the board game:
-![map1](https://user-images.githubusercontent.com/44768171/50381661-28728b80-0695-11e9-8ba3-bd64330dc541.png)
+![ex game](https://user-images.githubusercontent.com/44768171/50734645-8aa9b100-11aa-11e9-984f-d4787c037e8a.png)
 The map on Google Earth earth:
-![earth](https://user-images.githubusercontent.com/44768171/50277567-6bdab900-044d-11e9-97e5-4dd8a4dbc5b5.png)
-The Class Diagram:
 ![diagram](https://user-images.githubusercontent.com/44768171/50381640-b69a4200-0694-11e9-803e-56ec3703ba8c.png)
