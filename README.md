@@ -14,6 +14,7 @@ The player can load a .csv file.
 * [Algorithm idea](https://neos-guide.org/content/multiple-traveling-salesman-problem-mtsp)
 * [Reference source](https://coderanch.com/t/338737/java/draw-points-Java)
 * [Reference source](https://javatutorial.net/display-text-and-graphics-java-jframe)
+* [Dijkstra source](https://www.baeldung.com/java-dijkstra)
 
 ## Game options
 1) Automatic game. The only decition is where to locate the main player.
