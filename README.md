@@ -20,7 +20,7 @@ The player can load a .csv file.
 2) Mouse follow game. The palyer decide where to locate the main player and also responsible where to move him for the intare game.
 
 ## Java Jars
-1) Ex4_v0.2.jar - this jar is the main game from the * [Project site](https://github.com/benmoshe/OOP_EX2-EX4)
+1) Ex4_v0.2.jar - this jar is the server of the game.
 2) Graph_v0.1.jar
 3) mysql-connector-java-5.1.47.jar
 
