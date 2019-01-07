@@ -258,4 +258,5 @@ public class Point3D implements Geom_element, Serializable
 	public void set_z(double _z) {
 		this._z = _z;
 	}
+
 }

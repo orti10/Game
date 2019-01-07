@@ -2,7 +2,6 @@ package GIS;
 
 import java.util.ArrayList;
 import Coords.MyCoords;
-
 /**
  * 
  * @author Ortal, Tomer and Avichay
@@ -45,5 +44,4 @@ public class Path {
 	public void setPath(ArrayList<Fruit> path) {
 		this.path = path;
 	}
-	
 }

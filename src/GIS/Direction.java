@@ -2,11 +2,13 @@ package GIS;
 
 import java.awt.Graphics;
 import java.util.ArrayList;
+import Algo.Node;
+import Algo.ShortestPath;
 import Coords.MyCoords;
 import GUI.MyFrame;
 import Geom.Pixel;
 import Robot.Play;
-import graph.Point3D;
+import Geom.Point3D;
 /**
  * 
  * @author Ortal ,Tomer and Avichay
@@ -16,96 +18,79 @@ import graph.Point3D;
  */
 public class Direction {
 	private Game game;
-	private Graph_Ex graph;
-
+	private Path path;
+	private ShortestPath sp = new ShortestPath();
+	private MyCoords mc=new MyCoords();
+	private Map m = new Map();
+	private Dijkstra dijkstra = new Dijkstra();
 	public Direction() {
 		this.game = new Game();
-		this.graph = new Graph_Ex();
 	}
 	public Direction(Game game) {
 		this.game = game;
 	}
-	public Direction(Graph_Ex graph) {
-		super();
-		this.graph = graph;
-	}
+
 	public Game getGame() {
 		return game;
 	}
-	public Graph_Ex getGraph() {
-		return graph;
-	}
 
-	public double direction(ArrayList<String> board) {
-		MyCoords mc = new MyCoords();
+
+	public double direction(Game game) {
+		mc = new MyCoords();
 		Myplayer myplayer = game.getMyplayer();
 		double w = 1386;//x
 		double h = 732;//y
 		int minIndex =0;
 		char type ='F';
 		double teta =0;
-		double minTime= (mc.distance3d(myplayer.getGps(),game.getAf().get(0).getGps()))/myplayer.getSpeed();
-		for (int j = 0; j < game.getAf().size(); j++) {
-			if((mc.distance3d(myplayer.getGps(),game.getAf().get(j).getGps()))/myplayer.getSpeed() < minTime) {
-				minTime =(mc.distance3d(myplayer.getGps(),game.getAf().get(j).getGps()))/myplayer.getSpeed();
+		double minTime= (mc.distance3d(myplayer.getGps(),game.getFruits().get(0).getGps()))/myplayer.getSpeed();
+		for (int j = 0; j < game.getFruits().size(); j++) {
+			if((mc.distance3d(myplayer.getGps(),game.getFruits().get(j).getGps()))/myplayer.getSpeed() < minTime) {
+				minTime =(mc.distance3d(myplayer.getGps(),game.getFruits().get(j).getGps()))/myplayer.getSpeed();
 				minIndex =j;
 			}
 		}
-		for (int j = 0; j < game.getAp().size(); j++) {
-			if((mc.distance3d(myplayer.getGps(),game.getAp().get(j).getGps()))/myplayer.getSpeed() < minTime) {
+		for (int j = 0; j < game.getPacmans().size(); j++) {
+			if((mc.distance3d(myplayer.getGps(),game.getPacmans().get(j).getGps()))/myplayer.getSpeed() < minTime) {
 				type ='P';
-				minTime =(mc.distance3d(myplayer.getGps(),game.getAp().get(j).getGps()))/myplayer.getSpeed();
+				minTime =(mc.distance3d(myplayer.getGps(),game.getPacmans().get(j).getGps()))/myplayer.getSpeed();
 				minIndex =j;
 			}
 		}
+//		ArrayList<Point3D> tempBoxesPoints = new ArrayList<>();
+//		for (int i = 0; i < game.getBoxes().size(); i++) {
+//			tempBoxesPoints.add(game.getBoxes().get(i).getGps1());
+//			tempBoxesPoints.add(game.getBoxes().get(i).getGps2());
+//			tempBoxesPoints.add(new Point3D(game.getBoxes().get(i).getGps1().get_x(),game.getBoxes().get(i).getGps2().get_y()));
+//			tempBoxesPoints.add(new Point3D(game.getBoxes().get(i).getGps2().get_x(),game.getBoxes().get(i).getGps1().get_y()));
+//		}
 
 		if(type == 'F') {
-			double[] angles =mc.azimuth_elevation_dist(myplayer.getGps(), game.getAf().get(minIndex).getGps());
-			teta = angles[0];
-		}
-		else {
-			double[] angles =mc.azimuth_elevation_dist(myplayer.getGps(), game.getAp().get(minIndex).getGps());
-			teta = angles[0];
-		}
+			System.out.println("in Fruit");
 
-		for (int i = 0; i < game.getBoxes().size(); i++) {
-			
-			if(((Math.abs(myplayer.getPix().getY() - game.getBoxes().get(i).getPix1().getY())<3) ||
-					(Math.abs(myplayer.getPix().getY() - game.getBoxes().get(i).getPix2().getY())<3)) 
-					|| 
-					((Math.abs(myplayer.getPix().getX() - game.getBoxes().get(i).getPix1().getX())<3) ||
-					(Math.abs(myplayer.getPix().getX() - game.getBoxes().get(i).getPix2().getX())<3))){
-
-				//touch with box i (moving y limit)
-				if(Math.abs(myplayer.getPix().getY() - game.getBoxes().get(i).getPix1().getY())<3 ||
-						(Math.abs(myplayer.getPix().getY() - game.getBoxes().get(i).getPix2().getY())<3)) {
-
-					if(myplayer.getPix().distance(game.getBoxes().get(i).getPix1())
-							>=myplayer.getPix().distance(game.getBoxes().get(i).getPix2())) {
-						System.out.println("right");
-						teta=90;
-					}
-					else {
-						System.out.println("left");
-						teta=270;
-					}	
-				}
-				//touch with box i (moving x limit) 
-				if(Math.abs(myplayer.getPix().getX() - game.getBoxes().get(i).getPix1().getX())<3||
-						(Math.abs(myplayer.getPix().getX() - game.getBoxes().get(i).getPix2().getX())<3)) {
-
-					if(myplayer.getPix().distance(game.getBoxes().get(i).getPix2())
-							>=myplayer.getPix().distance(game.getBoxes().get(i).getPix1())) {
-						System.out.println("down");
-						teta=180;
-					}
-					else {
-						System.out.println("up");
-						teta=0;
-					}
-				}
+			if(!m.closeBoxVertexs(game.getBoxes(), game.getMyplayer().getPix(),game.getFruits().get(minIndex).getPix())) {
+				return teta = mc.azimuth_elevation_dist(game.getMyplayer().getGps(), game.getFruits().get(minIndex).getGps())[0];	
+			}
+			else {
+				Pixel ansPix =dijkstra.dijkstraAlgo(game.getBoxes(),game.getMyplayer().getPix(),game.getFruits().get(minIndex).getPix());
+				Point3D ansGps = m.getLatLonfromXY(ansPix);
+				return teta =mc.azimuth_elevation_dist(game.getMyplayer().getGps(), ansGps)[0];
 			}
 		}
-		return teta;
+		else {
+				System.out.println("in pacman");
+
+			if(!m.closeBoxVertexs(game.getBoxes(), game.getMyplayer().getPix(),game.getPacmans().get(minIndex).getPix())) {
+				return teta = mc.azimuth_elevation_dist(game.getMyplayer().getGps(), game.getPacmans().get(minIndex).getGps())[0];	
+			}
+			else {
+				Pixel ansPix =dijkstra.dijkstraAlgo(game.getBoxes(),game.getMyplayer().getPix(),game.getPacmans().get(minIndex).getPix());
+				Point3D ansGps = m.getLatLonfromXY(ansPix);
+				return teta =mc.azimuth_elevation_dist(game.getMyplayer().getGps(), ansGps)[0];
+			}
+
+		}
+		//System.out.println("final answer: " + teta);
 	}
+
 }

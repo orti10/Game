@@ -11,13 +11,13 @@ public class Myplayer {
 	private double radius;
 	private Pixel pix;
 	private int score;
-	
+
 	public Myplayer() {
 		this.type = "M";
 		this.id = 1;
 		this.gps = new Point3D();
-		this.speed = 0;
-		this.radius = 0;
+		this.speed = 1;
+		this.radius = 1;
 		this.pix = new Pixel();
 		this.score = 0;
 	}
@@ -37,7 +37,7 @@ public class Myplayer {
 		return "Myplayer [type=" + type + ", id=" + id + ", gps=" + gps + ", speed=" + speed + ", radius=" + radius
 				+ ", pix=" + pix + ", score=" + score + "]";
 	}
-	
+
 	public String getType() {
 		return type;
 	}
@@ -93,5 +93,5 @@ public class Myplayer {
 	public void setScore(int score) {
 		this.score = score;
 	}
-	
+
 }

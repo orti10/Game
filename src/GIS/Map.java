@@ -1,6 +1,9 @@
 package GIS;
 
+import java.awt.geom.Line2D;
 import java.io.File;
+import java.util.ArrayList;
+
 import Coords.MyCoords;
 import Geom.Pixel;
 import Geom.Point3D;
@@ -30,7 +33,7 @@ public class Map {
 	 * @return pixel
 	 */
 	public Pixel getXYfromLatLon(double latitude, double longitude) {
-		
+
 		double y = (mapHeight*latitude - mapHeight*north)/(south-north);
 		double x = (mapWidth*longitude - mapWidth*west)/(east-west);
 		return new Pixel(x,y);
@@ -42,7 +45,7 @@ public class Map {
 	 * @return coordinate
 	 */
 	public Point3D getLatLonfromXY(Pixel p) {
-		 
+
 		double lat =((p.getY()*(south-north))/mapHeight)+north;
 		double lon  = ((p.getX()*(east-west))/mapWidth)+west;
 		return new Point3D(lat,lon);
@@ -75,5 +78,57 @@ public class Map {
 		double  Pixeldistance = coord.distance3d(p, p2);
 		return Pixeldistance;
 	}
+
+	//double a = ((x4-x3)*(y1-y3)-(y4-y3)*(x1-x3))/((y4-y3)*(x2-x1)-(x4-x3)*(y2-y1));
+	//double b = ((x2-x1)*(y1-y3)-(y2-y1)*(x1-x3))/((y4-y3)*(x2-x1)-(x4-x3)*(y2-y1));
+	public boolean CrossingALine(Pixel start,Pixel end,Pixel source,Pixel target) {
+		double x1=source.getX();
+		double y1=source.getY();
+		double x2=target.getX();
+		double y2=target.getY();
+		double x3=start.getX();
+		double y3=start.getY();
+		double x4=end.getX();
+		double y4=end.getY();
+
+		double a = ((x4-x3)*(y1-y3)-(y4-y3)*(x1-x3))/((y4-y3)*(x2-x1)-(x4-x3)*(y2-y1));
+		double b = ((x2-x1)*(y1-y3)-(y2-y1)*(x1-x3))/((y4-y3)*(x2-x1)-(x4-x3)*(y2-y1));
+		if(a>=0 && a<=1 && b>=0 && b<=1) {
+			return true;
+		}		
+		return false;
+	}
+	public boolean closeBoxVertexs(ArrayList<Box> boxes, Pixel source ,Pixel target) {
+		ArrayList <Line> lines = new ArrayList<>();
+
+		for(int i=0;i<boxes.size();i++) {
+			
+			lines.add(new Line(new Pixel(boxes.get(i).getPix1().getX(),boxes.get(i).getPix1().getY()),new Pixel(boxes.get(i).getPix2().getX(),boxes.get(i).getPix1().getY())));
+			lines.add(new Line(new Pixel(boxes.get(i).getPix2().getX(),boxes.get(i).getPix2().getY()),new Pixel(boxes.get(i).getPix1().getX(),boxes.get(i).getPix2().getY())));
+			lines.add(new Line(new Pixel(boxes.get(i).getPix1().getX(),boxes.get(i).getPix1().getY()),new Pixel(boxes.get(i).getPix1().getX(),boxes.get(i).getPix2().getY())));
+			lines.add(new Line(new Pixel(boxes.get(i).getPix2().getX(),boxes.get(i).getPix2().getY()),new Pixel(boxes.get(i).getPix2().getX(),boxes.get(i).getPix1().getY())));
+		}
+		for (int i = 0; i < lines.size(); i++) {
+			if(CrossingALine(lines.get(i).getStart(), lines.get(i).getEnd(), source, target)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static void main(String[] args) {
+		Pixel source = new Pixel(817,512);
+		Pixel target = new Pixel(866,512);
+
+		Pixel bb1 = new Pixel(850,600); // true
+		Pixel bb2 = new Pixel(850,10); //true
+
+		ArrayList<Box> sd=new ArrayList<>();
+		Box b1 = new Box("b",1,new Point3D(0,0),new Point3D(0,0),bb1,bb2);
+		sd.add(b1);
+		Map d = new Map();
+		System.out.println(d.closeBoxVertexs(sd, source,target));
+	}
+
 	
 }

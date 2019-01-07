@@ -1,5 +1,7 @@
 package GIS;
 
+import java.util.ArrayList;
+
 import Geom.Pixel;
 import Geom.Point3D;
 
@@ -8,13 +10,14 @@ import Geom.Point3D;
  * This class represent a box on board.
  */
 public class Box {
-	
+
 	private String type;
 	private int id;
 	private Point3D gps1,gps2;
 	private Pixel pix1,pix2;
-	
-	
+	private Game game;
+
+
 	public Box() {
 		this.type ="B";
 		this.id=0;
@@ -23,8 +26,8 @@ public class Box {
 		this.pix1=new Pixel();
 		this.pix2=new Pixel();
 	}
-	
-	
+
+
 	public Box(String type, int id, Point3D gps1, Point3D gps2, Pixel pix1, Pixel pix2) {
 		super();
 		this.type = type;
@@ -35,8 +38,9 @@ public class Box {
 		this.pix2 = pix2;
 	}
 
-	public Box(Point3D gps1) {
+	public Box(Point3D gps1,Point3D gps2) {
 		this.gps1 = gps1;
+		this.gps2 = gps2;
 	}
 
 	@Override
@@ -51,34 +55,34 @@ public class Box {
 	public void setGps2(Point3D gps2) {
 		this.gps2 = gps2;
 	}
-	
+
 	public String getType() {
 		return type;
 	}
-	
+
 	public void setType(String type) {
 		this.type = type;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public Point3D getGps1() {
 		return gps1;
 	}
-	
+
 	public void setGps1(Point3D gps) {
 		this.gps1 = gps;
 	}
-	
+
 	public Pixel getPix1() {
 		return pix1;
 	}
-	
+
 	public void setPix1(Pixel pix) {
 		this.pix1 = pix;
 	}
@@ -92,7 +96,7 @@ public class Box {
 	public void setPix2(Pixel pix2) {
 		this.pix2 = pix2;
 	}
-	
-	
+
+
 
 }

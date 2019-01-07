@@ -22,9 +22,9 @@ public class MyThread extends Thread {
 	private Game game;
 	private MyFrame mf;
 	private Play play1;
-	private Point3D mouse;
 	private Map m;
 	private double dgree;
+	private boolean mouse;
 
 	/**
 	 * 
@@ -40,16 +40,23 @@ public class MyThread extends Thread {
 		this.play1=play1;
 	}
 
-	
-	public double getDgree() {
+
+	public double getAzimuth() {
 		return dgree;
 	}
 
 
-	public void setDgree(double dgree) {
+	public void setAzimuth(double dgree) {
 		this.dgree = dgree;
 	}
 
+	public boolean isMouse() {
+		return mouse;
+	}
+
+	public void setMouse(boolean mouse) {
+		this.mouse = mouse;
+	}
 
 	/**
 	 * run starts the game on the board when the user click/choose "run" option from the menu.
@@ -60,30 +67,32 @@ public class MyThread extends Thread {
 	public void run() {
 
 		play1.start();	
-		Direction dir = new Direction(game);
-		
-		//double azimuth = dgree;//mc.azimuth_elevation_dist(game.getMyplayer().getGps(), mouse)[0];
-		double teta=dir.direction(play1.getBoard());
-
+		Direction dir = new Direction();
+		double teta =0;
 		while(play1.isRuning()) {
-			//making sure that the pacmans are moving and the fruits are stable
-//			if(mouse==null) {
-//			game.getAf().clear();
-//			game.getAp().clear();
-//			game.getGhosts().clear();
-//			game.ReadBoard(play1.getBoard());
-//			play1.rotate(teta);
-//			mf.repaint();
-//			}	
-//			else if(mouse!=null) {
-				play1.rotate(getDgree());
-				game.getAf().clear();
-				game.getAp().clear();
+
+			if(mouse == true) {
+				play1.rotate(getAzimuth());
+				game.getFruits().clear();
+				game.getPacmans().clear();
 				game.getGhosts().clear();
+				game.getBoxes().clear();
+				game.ReadBoard(play1.getBoard());
+
+				mf.repaint();
+			}
+			if(mouse ==false) {
+				play1.rotate(teta);
+				game.getFruits().clear();
+				game.getPacmans().clear();
+				game.getGhosts().clear();
+				game.getBoxes().clear();
 				game.ReadBoard(play1.getBoard());
 				
+				teta =dir.direction(game);
+
 				mf.repaint();
-			//}
+			}
 			try {
 				sleep(100);
 
@@ -92,18 +101,6 @@ public class MyThread extends Thread {
 				e1.printStackTrace();
 			}	
 		}
-	mf.repaint();
+		mf.repaint();
 	}
 }
-//calculate when the loop ends
-//		long endTime = System.nanoTime() -startTime;
-//		System.out.println("The algorithem runing time is: " +(endTime/1000000000) +" seconds");
-//		for (int i = 0; i < game.getAp().size(); i++) {
-//			int timeAnswer =0;
-//			for (int j = 0; j < game.getAp().get(i).getPath().getPath().size(); j++) {
-//				timeAnswer += game.getAp().get(i).getPath().getPath().get(j).getTimeMet();
-//			}
-//			System.out.println("Pacman " + (i+1) + " took " + timeAnswer + " seconds to run");
-//		}
-//		mf.repaint();
-//}

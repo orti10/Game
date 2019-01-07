@@ -15,15 +15,15 @@ import Geom.Point3D;
  */
 public class Game implements Runnable {
 	private Myplayer myplayer;
-	private ArrayList<Pacman> ap;
-	private ArrayList<Fruit> af;
+	private ArrayList<Pacman> pacmans;
+	private ArrayList<Fruit> fruits;
 	private ArrayList<Box> boxes;
 	private ArrayList<Ghost> ghosts;
 
 	public Game() {
 		myplayer = new Myplayer();
-		ap = new ArrayList<Pacman>();
-		af = new ArrayList<Fruit>();
+		pacmans = new ArrayList<Pacman>();
+		fruits = new ArrayList<Fruit>();
 		boxes = new ArrayList<Box>();
 		ghosts = new ArrayList<Ghost>();
 	}
@@ -54,7 +54,7 @@ public class Game implements Runnable {
 					pac.setRadius(Double.parseDouble(s[6]));
 					Pixel pixel = m.getXYfromLatLon(pac.getGps().get_x(), pac.getGps().get_y());
 					pac.setPix(pixel);
-					this.ap.add(pac);
+					this.pacmans.add(pac);
 				}
 				else if (s[0].contains("F")){
 					Fruit f = new Fruit();
@@ -63,7 +63,7 @@ public class Game implements Runnable {
 					f.setWeight(Double.parseDouble(s[5]));
 					Pixel pixel = m.getXYfromLatLon(f.getGps().get_x(), f.getGps().get_y());
 					f.setPix(pixel);
-					this.af.add(f);
+					this.fruits.add(f);
 				}
 				else if (s[0].contains("B")){
 					Box box = new Box();
@@ -108,7 +108,7 @@ public class Game implements Runnable {
 				pac.setRadius(Double.parseDouble(s[6]));
 				Pixel pixel = m.getXYfromLatLon(pac.getGps().get_x(), pac.getGps().get_y());
 				pac.setPix(pixel);
-				this.ap.add(pac);
+				this.pacmans.add(pac);
 			}
 			else if (s[0].contains("F")){
 				Fruit f = new Fruit();
@@ -117,7 +117,7 @@ public class Game implements Runnable {
 				f.setWeight(Double.parseDouble(s[5]));
 				Pixel pixel = m.getXYfromLatLon(f.getGps().get_x(), f.getGps().get_y());
 				f.setPix(pixel);
-				this.af.add(f);
+				this.fruits.add(f);
 			}
 			else if (s[0].contains("B")){
 				Box box = new Box();
@@ -169,20 +169,20 @@ public class Game implements Runnable {
 	public void setGhosts(ArrayList<Ghost> ghosts) {
 		this.ghosts = ghosts;
 	}
-	public ArrayList<Pacman> getAp() {
-		return ap;
+	public ArrayList<Pacman> getPacmans() {
+		return pacmans;
 	}
 
-	public void setAp(ArrayList<Pacman> ap) {
-		this.ap = ap;
+	public void setPacmans(ArrayList<Pacman> pacmans) {
+		this.pacmans = pacmans;
 	}
 
-	public ArrayList<Fruit> getAf() {
-		return af;
+	public ArrayList<Fruit> getFruits() {
+		return fruits;
 	}
 
-	public void setAf(ArrayList<Fruit> af) {
-		this.af = af;
+	public void setFruits(ArrayList<Fruit> fruits) {
+		this.fruits = fruits;
 	}
 	/**
 	 * Constructor
@@ -194,16 +194,16 @@ public class Game implements Runnable {
 	 * 
 	 */
 
-	public Game(Myplayer myplayer ,ArrayList<Pacman> ap, ArrayList<Fruit> af, ArrayList<Box> boxes, ArrayList<Ghost> ghosts) {
+	public Game(Myplayer myplayer ,ArrayList<Pacman> pacmans, ArrayList<Fruit> fruits, ArrayList<Box> boxes, ArrayList<Ghost> ghosts) {
 		this.myplayer = myplayer;
-		this.ap = ap;
-		this.af = af;
+		this.pacmans = pacmans;
+		this.fruits = fruits;
 		this.boxes = boxes;
 		this.ghosts = ghosts;
 	}
 	@Override
 	public String toString() {
-		return "Game [myplayer=" + myplayer + ", ap=" + ap + ", af=" + af + ", boxes=" + boxes + ", ghosts=" + ghosts
+		return "Game [myplayer=" + myplayer + ", pacmans=" + pacmans + ", fruits=" + fruits + ", boxes=" + boxes + ", ghosts=" + ghosts
 				+ "]";
 	}
 
