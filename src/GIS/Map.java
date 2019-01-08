@@ -93,7 +93,7 @@ public class Map {
 
 		double a = ((x4-x3)*(y1-y3)-(y4-y3)*(x1-x3))/((y4-y3)*(x2-x1)-(x4-x3)*(y2-y1));
 		double b = ((x2-x1)*(y1-y3)-(y2-y1)*(x1-x3))/((y4-y3)*(x2-x1)-(x4-x3)*(y2-y1));
-		if(a>=0 && a<=1 && b>=0 && b<=1) {
+		if(a>0 && a<1 && b>0 && b<1) {
 			return true;
 		}		
 		return false;
