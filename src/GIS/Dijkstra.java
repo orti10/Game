@@ -15,6 +15,7 @@ import graph.Node;
 public class Dijkstra {
 
 	public Pixel dijkstraAlgo(ArrayList<Box> boxes, Pixel position, Pixel destination ) {
+<<<<<<< HEAD
 		Map m = new Map();
 
 		ArrayList<Pixel> biggerBoxesPoints = new ArrayList<>();
@@ -30,16 +31,39 @@ public class Dijkstra {
 		biggerBoxesPoints.add(destination); 
 
 		//checking if point is inside the rectangle
+=======
+
+		ArrayList<Pixel> pp = new ArrayList<>();
+
+		pp.add(position); // source is index 0
+		//checking if point is inside the rectangle
+		pp.add(destination); // target is index 1
+		
+		for(int i=0;i<boxes.size();i++) {
+			pp.add(boxes.get(i).getPix1());
+			pp.add(new Pixel(boxes.get(i).getPix2().getX(),boxes.get(i).getPix1().getY()));
+			pp.add(boxes.get(i).getPix2());	
+			pp.add(new Pixel(boxes.get(i).getPix1().getX(),boxes.get(i).getPix2().getY()));	
+		}
+
+
+>>>>>>> 4c24a53f90e070d02a50cfd01ad3327e0eacbbd2
 		Graph G = new Graph(); 
 		String source = "me";
 		String target = "food";
 
 		G.add(new Node(source)); // Node "me" (0)
+<<<<<<< HEAD
 		for(int i=1;i<biggerBoxesPoints.size()-1;i++) {
+=======
+
+		for(int i=2;i<pp.size();i++) {
+>>>>>>> 4c24a53f90e070d02a50cfd01ad3327e0eacbbd2
 			Node d = new Node(""+i);
 			G.add(d);
 		}
 		G.add(new Node(target)); // Node "food" last index
+<<<<<<< HEAD
 		for (int i = 0; i < biggerBoxesPoints.size()-1; i++) {
 			for (int j = i+1; j < biggerBoxesPoints.size(); j++) {
 				if(!m.closeBoxVertexs(boxes, biggerBoxesPoints.get(i), biggerBoxesPoints.get(j))) {
@@ -49,6 +73,27 @@ public class Dijkstra {
 							G.addEdge("me", "food", m.PixeldistanceInMeters(biggerBoxesPoints.get(i), biggerBoxesPoints.get(j)));
 						}
 						G.addEdge("me", ""+j, m.PixeldistanceInMeters(biggerBoxesPoints.get(i), biggerBoxesPoints.get(j)));
+=======
+
+		Map m = new Map();
+		for (int i = 0; i < pp.size()-1; i++) {
+			System.out.println("inside outer loop " +i);
+
+			for (int j = i+1; j < pp.size(); j++) {
+				System.out.println("inside inner loop " +j);
+
+				if(!m.closeBoxVertexs(boxes, pp.get(i), pp.get(j))) {
+					System.out.println("im in");
+
+					if(i==0) {
+						G.addEdge("me", ""+j, m.PixeldistanceInMeters(pp.get(i), pp.get(j)));
+					}
+					else if(i==1) {
+						G.addEdge("food", ""+j, m.PixeldistanceInMeters(pp.get(i), pp.get(j)));
+					}
+					else {
+						G.addEdge(""+i, ""+j,m.PixeldistanceInMeters(pp.get(i), pp.get(j)));
+>>>>>>> 4c24a53f90e070d02a50cfd01ad3327e0eacbbd2
 					}
 					if(j==biggerBoxesPoints.size()-1) {
 						G.addEdge(""+i, "food", m.PixeldistanceInMeters(biggerBoxesPoints.get(i), biggerBoxesPoints.get(j)));
