@@ -22,7 +22,6 @@ public class Direction {
 	private ShortestPath sp = new ShortestPath();
 	private MyCoords mc=new MyCoords();
 	private Map m = new Map();
-	private Dijkstra dijkstra = new Dijkstra();
 	public Direction() {
 		this.game = new Game();
 	}
@@ -66,24 +65,24 @@ public class Direction {
 //		}
 
 		if(type == 'F') {
-			System.out.println("in Fruit");
 
 			if(!m.closeBoxVertexs(game.getBoxes(), game.getMyplayer().getPix(),game.getFruits().get(minIndex).getPix())) {
 				return teta = mc.azimuth_elevation_dist(game.getMyplayer().getGps(), game.getFruits().get(minIndex).getGps())[0];	
 			}
 			else {
+				Dijkstra dijkstra = new Dijkstra();
 				Pixel ansPix =dijkstra.dijkstraAlgo(game.getBoxes(),game.getMyplayer().getPix(),game.getFruits().get(minIndex).getPix());
 				Point3D ansGps = m.getLatLonfromXY(ansPix);
 				return teta =mc.azimuth_elevation_dist(game.getMyplayer().getGps(), ansGps)[0];
 			}
 		}
 		else {
-				System.out.println("in pacman");
 
 			if(!m.closeBoxVertexs(game.getBoxes(), game.getMyplayer().getPix(),game.getPacmans().get(minIndex).getPix())) {
 				return teta = mc.azimuth_elevation_dist(game.getMyplayer().getGps(), game.getPacmans().get(minIndex).getGps())[0];	
 			}
 			else {
+				Dijkstra dijkstra = new Dijkstra();
 				Pixel ansPix =dijkstra.dijkstraAlgo(game.getBoxes(),game.getMyplayer().getPix(),game.getPacmans().get(minIndex).getPix());
 				Point3D ansGps = m.getLatLonfromXY(ansPix);
 				return teta =mc.azimuth_elevation_dist(game.getMyplayer().getGps(), ansGps)[0];

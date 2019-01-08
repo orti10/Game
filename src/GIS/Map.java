@@ -32,10 +32,10 @@ public class Map {
 	 * function to convert from coordinate to pixel
 	 * @return pixel
 	 */
-	public Pixel getXYfromLatLon(double latitude, double longitude) {
+	public Pixel getXYfromLatLon(Point3D gps1) {
 
-		double y = (mapHeight*latitude - mapHeight*north)/(south-north);
-		double x = (mapWidth*longitude - mapWidth*west)/(east-west);
+		double y = (mapHeight*gps1.x() - mapHeight*north)/(south-north);
+		double x = (mapWidth*gps1.y() - mapWidth*west)/(east-west);
 		return new Pixel(x,y);
 	}
 
@@ -102,13 +102,15 @@ public class Map {
 		ArrayList <Line> lines = new ArrayList<>();
 
 		for(int i=0;i<boxes.size();i++) {
-			
 			lines.add(new Line(new Pixel(boxes.get(i).getPix1().getX(),boxes.get(i).getPix1().getY()),new Pixel(boxes.get(i).getPix2().getX(),boxes.get(i).getPix1().getY())));
 			lines.add(new Line(new Pixel(boxes.get(i).getPix2().getX(),boxes.get(i).getPix2().getY()),new Pixel(boxes.get(i).getPix1().getX(),boxes.get(i).getPix2().getY())));
 			lines.add(new Line(new Pixel(boxes.get(i).getPix1().getX(),boxes.get(i).getPix1().getY()),new Pixel(boxes.get(i).getPix1().getX(),boxes.get(i).getPix2().getY())));
 			lines.add(new Line(new Pixel(boxes.get(i).getPix2().getX(),boxes.get(i).getPix2().getY()),new Pixel(boxes.get(i).getPix2().getX(),boxes.get(i).getPix1().getY())));
 		}
+		
 		for (int i = 0; i < lines.size(); i++) {
+//			System.out.println("line " +i+ ":" +lines.get(i));
+//			System.out.println(source +"," +target);
 			if(CrossingALine(lines.get(i).getStart(), lines.get(i).getEnd(), source, target)) {
 				return true;
 			}

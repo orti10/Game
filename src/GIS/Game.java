@@ -52,7 +52,7 @@ public class Game implements Runnable {
 					pac.setGps(new Point3D(Double.parseDouble(s[2]),Double.parseDouble(s[3]),Double.parseDouble(s[4])));
 					pac.setSpeed(Double.parseDouble(s[5]));
 					pac.setRadius(Double.parseDouble(s[6]));
-					Pixel pixel = m.getXYfromLatLon(pac.getGps().get_x(), pac.getGps().get_y());
+					Pixel pixel = m.getXYfromLatLon(pac.getGps());
 					pac.setPix(pixel);
 					this.pacmans.add(pac);
 				}
@@ -61,7 +61,7 @@ public class Game implements Runnable {
 					f.setId(Integer.parseInt(s[1]));
 					f.setGps(new Point3D(Double.parseDouble(s[2]),Double.parseDouble(s[3]),Double.parseDouble(s[4])));
 					f.setWeight(Double.parseDouble(s[5]));
-					Pixel pixel = m.getXYfromLatLon(f.getGps().get_x(), f.getGps().get_y());
+					Pixel pixel = m.getXYfromLatLon(f.getGps());
 					f.setPix(pixel);
 					this.fruits.add(f);
 				}
@@ -70,8 +70,8 @@ public class Game implements Runnable {
 					box.setId(Integer.parseInt(s[1]));
 					box.setGps1(new Point3D(Double.parseDouble(s[2]),Double.parseDouble(s[3]),Double.parseDouble(s[4])));
 					box.setGps2(new Point3D(Double.parseDouble(s[5]),Double.parseDouble(s[6]),Double.parseDouble(s[7])));
-					Pixel pixel1 = m.getXYfromLatLon(box.getGps1().get_x(), box.getGps1().get_y());
-					Pixel pixel2 = m.getXYfromLatLon(box.getGps2().get_x(), box.getGps2().get_y());
+					Pixel pixel1 = m.getXYfromLatLon(box.getGps1());
+					Pixel pixel2 = m.getXYfromLatLon(box.getGps2());
 					box.setPix1(pixel1);
 					box.setPix2(pixel2);
 					this.boxes.add(box);
@@ -81,7 +81,7 @@ public class Game implements Runnable {
 					Ghost ghost = new Ghost();
 					ghost.setId(Integer.parseInt(s[1]));
 					ghost.setGps(new Point3D(Double.parseDouble(s[2]),Double.parseDouble(s[3]),Double.parseDouble(s[4])));
-					Pixel pixel = m.getXYfromLatLon(ghost.getGps().get_x(), ghost.getGps().get_y());
+					Pixel pixel = m.getXYfromLatLon(ghost.getGps());
 					ghost.setPix(pixel);
 					ghost.setSpeed(Double.parseDouble(s[5]));
 					ghost.setRadius(Double.parseDouble(s[6]));
@@ -106,7 +106,7 @@ public class Game implements Runnable {
 				pac.setGps(new Point3D(Double.parseDouble(s[2]),Double.parseDouble(s[3]),Double.parseDouble(s[4])));
 				pac.setSpeed(Double.parseDouble(s[5]));
 				pac.setRadius(Double.parseDouble(s[6]));
-				Pixel pixel = m.getXYfromLatLon(pac.getGps().get_x(), pac.getGps().get_y());
+				Pixel pixel = m.getXYfromLatLon(pac.getGps());
 				pac.setPix(pixel);
 				this.pacmans.add(pac);
 			}
@@ -115,7 +115,7 @@ public class Game implements Runnable {
 				f.setId(Integer.parseInt(s[1]));
 				f.setGps(new Point3D(Double.parseDouble(s[2]),Double.parseDouble(s[3]),Double.parseDouble(s[4])));
 				f.setWeight(Double.parseDouble(s[5]));
-				Pixel pixel = m.getXYfromLatLon(f.getGps().get_x(), f.getGps().get_y());
+				Pixel pixel = m.getXYfromLatLon(f.getGps());
 				f.setPix(pixel);
 				this.fruits.add(f);
 			}
@@ -124,8 +124,8 @@ public class Game implements Runnable {
 				box.setId(Integer.parseInt(s[1]));
 				box.setGps1(new Point3D(Double.parseDouble(s[2]),Double.parseDouble(s[3]),Double.parseDouble(s[4])));
 				box.setGps2(new Point3D(Double.parseDouble(s[5]),Double.parseDouble(s[6]),Double.parseDouble(s[7])));
-				Pixel pixel1 = m.getXYfromLatLon(box.getGps1().get_x(), box.getGps1().get_y());
-				Pixel pixel2 = m.getXYfromLatLon(box.getGps2().get_x(), box.getGps2().get_y());
+				Pixel pixel1 = m.getXYfromLatLon(box.getGps1());
+				Pixel pixel2 = m.getXYfromLatLon(box.getGps2());
 				box.setPix1(pixel1);
 				box.setPix2(pixel2);
 				this.boxes.add(box);
@@ -135,7 +135,7 @@ public class Game implements Runnable {
 				Ghost ghost = new Ghost();
 				ghost.setId(Integer.parseInt(s[1]));
 				ghost.setGps(new Point3D(Double.parseDouble(s[2]),Double.parseDouble(s[3]),Double.parseDouble(s[4])));
-				Pixel pixel = m.getXYfromLatLon(ghost.getGps().get_x(), ghost.getGps().get_y());
+				Pixel pixel = m.getXYfromLatLon(ghost.getGps());
 				ghost.setPix(pixel);
 				this.ghosts.add(ghost);
 
@@ -143,7 +143,7 @@ public class Game implements Runnable {
 			else if (s[0].contains("M")){
 				myplayer.setId(Integer.parseInt(s[1]));
 				myplayer.setGps(new Point3D(Double.parseDouble(s[2]),Double.parseDouble(s[3]),Double.parseDouble(s[4])));
-				Pixel pixel = m.getXYfromLatLon(myplayer.getGps().get_x(), myplayer.getGps().get_y());
+				Pixel pixel = m.getXYfromLatLon(myplayer.getGps());
 				myplayer.setPix(pixel);
 				myplayer.setSpeed(Double.parseDouble(s[5]));
 			}

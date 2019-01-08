@@ -1,9 +1,6 @@
 package GIS;
 import java.util.ArrayList;
-
-import Coords.MyCoords;
 import Geom.Pixel;
-import Geom.Point3D;
 import graph.Graph;
 import graph.Graph_Algo;
 import graph.Node;
@@ -16,65 +13,65 @@ import graph.Node;
  *
  */
 public class Dijkstra {
-	
+
 	public Pixel dijkstraAlgo(ArrayList<Box> boxes, Pixel position, Pixel destination ) {
+		Map m = new Map();
+
+		ArrayList<Pixel> biggerBoxesPoints = new ArrayList<>();
+
 		
-		ArrayList<Pixel> pp = new ArrayList<>();
-		
-		pp.add(position); 
-		for(int i=0;i<boxes.size();i++) {
-			pp.add(boxes.get(i).getPix1());
-			pp.add(new Pixel(boxes.get(i).getPix2().getX(),boxes.get(i).getPix1().getY()));
-			pp.add(boxes.get(i).getPix2());	
-			pp.add(new Pixel(boxes.get(i).getPix1().getX(),boxes.get(i).getPix2().getY()));	
+		biggerBoxesPoints.add(position);
+		for (int i = 0; i < boxes.size(); i++) {
+			biggerBoxesPoints.add(new Pixel(boxes.get(i).getPix1().getX()-5,boxes.get(i).getPix1().getY()+5));
+			biggerBoxesPoints.add(new Pixel(boxes.get(i).getPix2().getX()+5,boxes.get(i).getPix1().getY()+5));
+			biggerBoxesPoints.add(new Pixel(boxes.get(i).getPix2().getX()+5,boxes.get(i).getPix2().getY()-5));
+			biggerBoxesPoints.add(new Pixel(boxes.get(i).getPix1().getX()-5,boxes.get(i).getPix2().getY()-5));		
 		}
+		biggerBoxesPoints.add(destination); 
+
 		//checking if point is inside the rectangle
-		pp.add(destination); 
-		
-		
 		Graph G = new Graph(); 
 		String source = "me";
 		String target = "food";
+
 		G.add(new Node(source)); // Node "me" (0)
-		
-		for(int i=1;i<pp.size()-1;i++) {
+		for(int i=1;i<biggerBoxesPoints.size()-1;i++) {
 			Node d = new Node(""+i);
 			G.add(d);
 		}
 		G.add(new Node(target)); // Node "food" last index
-		
-		Map m = new Map();
-		for (int i = 0; i < pp.size()-1; i++) {
-			System.out.println("inside outer loop " +i);
-	
-			for (int j = i+1; j < pp.size(); j++) {
-				System.out.println("inside inner loop " +j);
-	
-				if(!m.closeBoxVertexs(boxes, pp.get(i), pp.get(j))) {
-					System.out.println("im in");
-	
+		for (int i = 0; i < biggerBoxesPoints.size()-1; i++) {
+			for (int j = i+1; j < biggerBoxesPoints.size(); j++) {
+				if(!m.closeBoxVertexs(boxes, biggerBoxesPoints.get(i), biggerBoxesPoints.get(j))) {
+					
 					if(i==0) {
-							G.addEdge("me", ""+j, m.PixeldistanceInMeters(pp.get(i), pp.get(j)));
+						if(j==biggerBoxesPoints.size()-1) {
+							G.addEdge("me", "food", m.PixeldistanceInMeters(biggerBoxesPoints.get(i), biggerBoxesPoints.get(j)));
 						}
-						G.addEdge(""+i, ""+j,m.PixeldistanceInMeters(pp.get(i), pp.get(j)));
+						G.addEdge("me", ""+j, m.PixeldistanceInMeters(biggerBoxesPoints.get(i), biggerBoxesPoints.get(j)));
 					}
+					if(j==biggerBoxesPoints.size()-1) {
+						G.addEdge(""+i, "food", m.PixeldistanceInMeters(biggerBoxesPoints.get(i), biggerBoxesPoints.get(j)));
+					}	
+					G.addEdge(""+i, ""+j,m.PixeldistanceInMeters(biggerBoxesPoints.get(i), biggerBoxesPoints.get(j)));
 				}
+			}
 		}
-		System.out.println(G);
 		// This is the main call for computing all the shortest path from node 0 ("a")
 		Graph_Algo.dijkstra(G, source);
-		
+
 		Node b = G.getNodeByName(target);
-		System.out.println("***** Graph Demo for OOP_Ex4 *****");
-		System.out.println(b);
-		System.out.println("Dist: "+b.getDist());
+//		System.out.println("***** Graph Demo for OOP_Ex4 *****");
+//		System.out.println(b);
+//		System.out.println("Dist: "+b.getDist());
 		ArrayList<String> shortestPath = b.getPath();
-		for(int i=0;i<shortestPath.size();i++) {
-			System.out.print(","+shortestPath.get(i));
-		}
+//		for(int i=0;i<shortestPath.size();i++) {
+//			System.out.println(","+shortestPath.get(i));
+//		}
 		String s = shortestPath.get(1);
-		Pixel ans = pp.get(Integer.parseInt(s));	
+		Pixel ans = biggerBoxesPoints.get(Integer.parseInt(s));	
+		//System.out.println("the answer is" +ans);
 		return ans;		
 	}
-	
+
 }

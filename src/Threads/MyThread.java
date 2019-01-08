@@ -82,6 +82,7 @@ public class MyThread extends Thread {
 				mf.repaint();
 			}
 			if(mouse ==false) {
+				teta =dir.direction(game);
 				play1.rotate(teta);
 				game.getFruits().clear();
 				game.getPacmans().clear();
@@ -89,7 +90,6 @@ public class MyThread extends Thread {
 				game.getBoxes().clear();
 				game.ReadBoard(play1.getBoard());
 				
-				teta =dir.direction(game);
 
 				mf.repaint();
 			}
