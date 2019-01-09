@@ -1,7 +1,5 @@
 package GIS;
 
-import java.awt.geom.Line2D;
-import java.io.File;
 import java.util.ArrayList;
 
 import Coords.MyCoords;
@@ -20,7 +18,7 @@ import Geom.Point3D;
 	//https://stackoverflow.com/questions/35299786/draw-circle-on-jpanel-after-mouse-click/35300018
  */
 public class Map {
-	private File image = new File("C:\\temp\\Ariel1.png");
+	//private File image = new File("C:\\temp\\Ariel1.png");
 	private int mapWidth = 1433;
 	private int mapHeight = 642;
 	private double west = 35.202574; 
@@ -79,8 +77,6 @@ public class Map {
 		return Pixeldistance;
 	}
 
-	//double a = ((x4-x3)*(y1-y3)-(y4-y3)*(x1-x3))/((y4-y3)*(x2-x1)-(x4-x3)*(y2-y1));
-	//double b = ((x2-x1)*(y1-y3)-(y2-y1)*(x1-x3))/((y4-y3)*(x2-x1)-(x4-x3)*(y2-y1));
 	public boolean CrossingALine(Pixel start,Pixel end,Pixel source,Pixel target) {
 		double x1=source.getX();
 		double y1=source.getY();
@@ -109,8 +105,6 @@ public class Map {
 		}
 		
 		for (int i = 0; i < lines.size(); i++) {
-//			System.out.println("line " +i+ ":" +lines.get(i));
-//			System.out.println(source +"," +target);
 			if(CrossingALine(lines.get(i).getStart(), lines.get(i).getEnd(), source, target)) {
 				return true;
 			}
@@ -118,19 +112,4 @@ public class Map {
 		return false;
 	}
 
-	public static void main(String[] args) {
-		Pixel source = new Pixel(817,512);
-		Pixel target = new Pixel(866,512);
-
-		Pixel bb1 = new Pixel(850,600); // true
-		Pixel bb2 = new Pixel(850,10); //true
-
-		ArrayList<Box> sd=new ArrayList<>();
-		Box b1 = new Box("b",1,new Point3D(0,0),new Point3D(0,0),bb1,bb2);
-		sd.add(b1);
-		Map d = new Map();
-		System.out.println(d.closeBoxVertexs(sd, source,target));
-	}
-
-	
 }

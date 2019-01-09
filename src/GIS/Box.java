@@ -1,7 +1,5 @@
 package GIS;
 
-import java.util.ArrayList;
-
 import Geom.Pixel;
 import Geom.Point3D;
 
@@ -15,7 +13,6 @@ public class Box {
 	private int id;
 	private Point3D gps1,gps2;
 	private Pixel pix1,pix2;
-	private Game game;
 
 
 	public Box() {
