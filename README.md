@@ -36,5 +36,5 @@ The player can load a .csv file.
 
 Excample of the board game:
 ![ex game](https://user-images.githubusercontent.com/44768171/50734645-8aa9b100-11aa-11e9-984f-d4787c037e8a.png)
-The map on Google Earth earth:
-![diagram](https://user-images.githubusercontent.com/44768171/50381640-b69a4200-0694-11e9-803e-56ec3703ba8c.png)
+The class Diagram:
+![gamediagram](https://user-images.githubusercontent.com/44768171/50905690-0cf4d800-142c-11e9-8889-0e3257a3b683.jpg)
