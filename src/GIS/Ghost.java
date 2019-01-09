@@ -4,7 +4,7 @@ import Geom.Pixel;
 import Geom.Point3D;
 
 public class Ghost {
-	
+
 	private String type;
 	private int id;
 	private Point3D gps;
@@ -12,7 +12,7 @@ public class Ghost {
 	private double speed;
 	private double radius;
 
-	
+
 
 	public Ghost() {
 		this.type ="G";

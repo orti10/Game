@@ -12,7 +12,7 @@ import Geom.Pixel;
 public class Line {
 	private Pixel start;
 	private Pixel end;
-	
+
 	public Line() {
 		start = new Pixel();
 		end = new Pixel();
@@ -43,5 +43,5 @@ public class Line {
 	public String toString() {
 		return "Line [start=" + start + ", end=" + end + "]";
 	}
-	
+
 }

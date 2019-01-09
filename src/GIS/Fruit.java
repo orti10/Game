@@ -19,7 +19,7 @@ public class Fruit {
 	private Pixel pix;
 	private String currentTime;
 	private double timeMet;
-	
+
 	public Fruit() {
 		this.type ="F";
 		this.id=0;
@@ -84,7 +84,7 @@ public class Fruit {
 		this.pix = pix;
 	}
 
-	
+
 
 	public String getCurrentTime() {
 		return currentTime;
@@ -107,5 +107,5 @@ public class Fruit {
 		return "Fruit [type=" + type + ", id=" + id + ", gps=" + gps + ", weight=" + weight + ", color=" + color
 				+ ", pix=" + pix + ", currentTime=" + currentTime + ", timeMet=" + timeMet + "]";
 	}
-	
+
 }

@@ -1,19 +1,13 @@
 package Algo;
 
-import java.awt.Graphics;
 import java.util.ArrayList;
-import Algo.Node;
-import Algo.ShortestPath;
 import Coords.MyCoords;
 import GIS.Box;
 import GIS.Game;
 import GIS.Map;
 import GIS.Myplayer;
 import GIS.Pacman;
-import GIS.Path;
-import GUI.MyFrame;
 import Geom.Pixel;
-import Robot.Play;
 import Geom.Point3D;
 /**
  * 
@@ -24,8 +18,6 @@ import Geom.Point3D;
  */
 public class Direction {
 	private Game game;
-	private Path path;
-	private ShortestPath sp = new ShortestPath();
 	private MyCoords mc=new MyCoords();
 	private Map m = new Map();
 	public Direction() {
@@ -63,13 +55,6 @@ public class Direction {
 				minIndex =j;
 			}
 		}
-		//		ArrayList<Point3D> tempBoxesPoints = new ArrayList<>();
-		//		for (int i = 0; i < game.getBoxes().size(); i++) {
-		//			tempBoxesPoints.add(game.getBoxes().get(i).getGps1());
-		//			tempBoxesPoints.add(game.getBoxes().get(i).getGps2());
-		//			tempBoxesPoints.add(new Point3D(game.getBoxes().get(i).getGps1().get_x(),game.getBoxes().get(i).getGps2().get_y()));
-		//			tempBoxesPoints.add(new Point3D(game.getBoxes().get(i).getGps2().get_x(),game.getBoxes().get(i).getGps1().get_y()));
-		//		}
 
 		if(type == 'F') {
 
@@ -96,7 +81,6 @@ public class Direction {
 			}
 
 		}
-		//System.out.println("final answer: " + teta);
 	}
 	
 	/*
@@ -146,7 +130,7 @@ public class Direction {
 		float A4 = area(x, y, x1, y1, x4, y4); 
 
 		/* Check if sum of A1, A2, A3 and A4  
-is same as A */
+			is same as A */
 		return (A == A1 + A2 + A3 + A4) || ((y==y1 && x>x1 && x<x2)||
 				(x==x2 && y<y1 && y>y2)|| (y==y2 && x<x2 && x>x1)||
 				(x==x1 && y<y1 && y>y2)) ; 

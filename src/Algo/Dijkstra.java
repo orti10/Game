@@ -22,7 +22,7 @@ public class Dijkstra {
 
 		ArrayList<Pixel> biggerBoxesPoints = new ArrayList<>();
 
-		
+
 		biggerBoxesPoints.add(position);
 		for (int i = 0; i < boxes.size(); i++) {
 			//5.6 limit of my player and dijkstra in the frame
@@ -61,20 +61,14 @@ public class Dijkstra {
 			}
 		}
 		// This is the main call for computing all the shortest path from node 0 ("a")
-		//System.out.println(G);
 		Graph_Algo.dijkstra(G, source);
 
 		Node b = G.getNodeByName(target);
-//		System.out.println("***** Graph Demo for OOP_Ex4 *****");
-//		System.out.println(b);
-//		System.out.println("Dist: "+b.getDist());
+
 		ArrayList<String> shortestPath = b.getPath();
-//		for(int i=0;i<shortestPath.size();i++) {
-//			System.out.println(","+shortestPath.get(i));
-//		}
+
 		String s = shortestPath.get(1);
 		Pixel ans = biggerBoxesPoints.get(Integer.parseInt(s));	
-		//System.out.println("the answer is" +ans);
 		return ans;		
 	}
 

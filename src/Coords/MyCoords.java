@@ -1,6 +1,5 @@
 package Coords;
 
-import java.util.Arrays;
 import Geom.Point3D;
 
 public class MyCoords implements coords_converter {
