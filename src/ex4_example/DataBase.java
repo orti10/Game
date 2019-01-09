@@ -28,7 +28,7 @@ public class DataBase { //use to be "Stam" file from Yael
 			
 			//selsct data, someDouble represent the code of the file we run on
 			// for example 2128259830 is file number #2
-			String allCustomersQuery = "SELECT * FROM logs WHERE someDouble=552196504;";
+			String allCustomersQuery = "SELECT * FROM logs WHERE someDouble=2128259830;";
 			ResultSet resultSet = statement.executeQuery(allCustomersQuery);//ביצוע שאילתה
 			System.out.println("FirstID\t\tSecondID\tThirdID\t\tLogTime\t\t\t\tPoint\t\tSomeDouble");
 			

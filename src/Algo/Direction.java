@@ -47,6 +47,7 @@ public class Direction {
 		int minIndex =0;
 		char type ='F';
 		double teta =0;
+		
 		double minTime= (mc.distance3d(myplayer.getGps(),game.getFruits().get(0).getGps()))/myplayer.getSpeed();
 		for (int j = 0; j < game.getFruits().size(); j++) {
 			if((mc.distance3d(myplayer.getGps(),game.getFruits().get(j).getGps()))/myplayer.getSpeed() < minTime) {
@@ -97,11 +98,11 @@ public class Direction {
 		}
 		//System.out.println("final answer: " + teta);
 	}
+	
 	/*
 	 * https://www.geeksforgeeks.org/check-whether-given-point-lies-inside-rectangle-not/
 	 * using this web for insideBox check area functions
 	 */
-	
 	public boolean insideBox(Pacman pacman , ArrayList<Box>boxes) {
 
 		boolean flag = false;

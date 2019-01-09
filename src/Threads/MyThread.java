@@ -1,9 +1,7 @@
 package Threads;
 
 import GIS.Game;
-
 import java.awt.event.MouseEvent;
-
 import GIS.Map;
 import Coords.MyCoords;
 import Algo.Direction;
@@ -69,6 +67,7 @@ public class MyThread extends Thread {
 		play1.start();	
 		Direction dir = new Direction();
 		double teta =0;
+		
 		while(play1.isRuning()) {
 
 			if(mouse == true) {
@@ -90,9 +89,14 @@ public class MyThread extends Thread {
 				game.getBoxes().clear();
 				game.ReadBoard(play1.getBoard());
 				
-
 				mf.repaint();
 			}
+			
+			if(game.getFruits().isEmpty()) {
+				System.out.println("GAME OVER !!!!");
+				play1.stop();
+			}
+			
 			try {
 				sleep(50);
 

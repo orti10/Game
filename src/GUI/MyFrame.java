@@ -72,7 +72,6 @@ public class MyFrame extends JFrame {
 		JMenuItem runAuto = new JMenuItem("RunAuto");
 		JMenuItem runMouse = new JMenuItem("RunMouse");
 
-
 		menuBar.add(file);
 		file.add(clear); 
 		file.add(open); 
@@ -86,6 +85,8 @@ public class MyFrame extends JFrame {
 		clear.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,  ActionEvent.CTRL_MASK));
 		open.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,  ActionEvent.CTRL_MASK));
 		exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,  ActionEvent.CTRL_MASK));
+		runAuto.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,  ActionEvent.CTRL_MASK));
+
 
 		this.setJMenuBar(menuBar);
 		try {
@@ -156,7 +157,6 @@ public class MyFrame extends JFrame {
 		//if the user wants to run the game
 		//using Thread to make the moves to be on the same time when the game is running
 		runAuto.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//link to MyThread	

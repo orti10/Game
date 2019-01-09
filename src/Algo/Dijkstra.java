@@ -47,8 +47,7 @@ public class Dijkstra {
 			for (int j = i+1; j < biggerBoxesPoints.size(); j++) {
 				if(!m.closeBoxVertexs(boxes, biggerBoxesPoints.get(i), biggerBoxesPoints.get(j))) {
 					if(i==0) {
-						System.out.println(biggerBoxesPoints.get(0)+","+ biggerBoxesPoints.get(j));
-
+						
 						if(j==biggerBoxesPoints.size()-1) {
 							G.addEdge("me", "food", m.PixeldistanceInMeters(biggerBoxesPoints.get(i), biggerBoxesPoints.get(j)));
 						}
