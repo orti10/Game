@@ -2,6 +2,7 @@
 Codding by: Tomer Maabari ,Ortal Hanoch and Avichay Nega.
 * Exercise number 4 on Computer Science and Mathematics , Ariel University 2018.
 
+## General
 The game is about the classic Pacman game who eat fruits and gets corse.
 The game board is a picture of a map with pixels who from Google Earth GPS coordinates.
 The goal of this game is finishing the fruits as fast as possible.
