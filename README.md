@@ -17,7 +17,7 @@ The player needs to run away from the scary ghoset.
 
 The player can load a .csv file.
 
-##Example
+## Example
 For csv file number #8 id:306711633 we got the score 35.0.
 
 ## Built With
