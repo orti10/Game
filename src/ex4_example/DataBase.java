@@ -19,7 +19,6 @@ public class DataBase { //use to be "Stam" file from Yael
 			Connection connection = 
 					DriverManager.getConnection(jdbcUrl, jdbcUser, jdbcPassword);
 			
-			
 			Statement statement = connection.createStatement();
 			
 //			//insert data                                                                    //file name hash
@@ -27,8 +26,9 @@ public class DataBase { //use to be "Stam" file from Yael
 //					"VALUES (1, 2, 3, CURRENT_TIMESTAMP, 1.1, 2.2);";
 //			statement.executeUpdate(insertSQL);
 			
-			//selsct data
-			String allCustomersQuery = "SELECT * FROM logs WHERE someDouble=;";// logs is the name of the טבלה
+			//selsct data, someDouble represent the code of the file we run on
+			// for example 2128259830 is file number #2
+			String allCustomersQuery = "SELECT * FROM logs WHERE someDouble=552196504;";
 			ResultSet resultSet = statement.executeQuery(allCustomersQuery);//ביצוע שאילתה
 			System.out.println("FirstID\t\tSecondID\tThirdID\t\tLogTime\t\t\t\tPoint\t\tSomeDouble");
 			
@@ -38,10 +38,9 @@ public class DataBase { //use to be "Stam" file from Yael
 						resultSet.getInt("SecondID")+"\t\t" +//tomer
 						resultSet.getInt("ThirdID")+"\t\t" +//avichay
 						resultSet.getTimestamp("LogTime") +"\t\t\t\t" +//what time we play
-						resultSet.getDouble("Point") +"\t\t" +//ניקוד
+						resultSet.getDouble("Point") +"\t\t" +//score
 						resultSet.getDouble("SomeDouble"));//info of the id of configuration
 			}
-			
 			resultSet.close();		
 			statement.close();		
 			connection.close();		

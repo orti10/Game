@@ -1,5 +1,8 @@
-package GIS;
+package Algo;
 import java.util.ArrayList;
+
+import GIS.Box;
+import GIS.Map;
 import Geom.Pixel;
 import graph.Graph;
 import graph.Graph_Algo;
@@ -22,13 +25,13 @@ public class Dijkstra {
 		
 		biggerBoxesPoints.add(position);
 		for (int i = 0; i < boxes.size(); i++) {
-			biggerBoxesPoints.add(new Pixel(boxes.get(i).getPix1().getX()-1,boxes.get(i).getPix1().getY()+1));
-			biggerBoxesPoints.add(new Pixel(boxes.get(i).getPix2().getX()+1,boxes.get(i).getPix1().getY()+1));
-			biggerBoxesPoints.add(new Pixel(boxes.get(i).getPix2().getX()+1,boxes.get(i).getPix2().getY()-1));
-			biggerBoxesPoints.add(new Pixel(boxes.get(i).getPix1().getX()-1,boxes.get(i).getPix2().getY()-1));		
+			//5.6 limit of my player and dijkstra in the frame
+			biggerBoxesPoints.add(new Pixel(boxes.get(i).getPix1().getX()-5.6,boxes.get(i).getPix1().getY()+5.6));
+			biggerBoxesPoints.add(new Pixel(boxes.get(i).getPix2().getX()+5.6,boxes.get(i).getPix1().getY()+5.6));
+			biggerBoxesPoints.add(new Pixel(boxes.get(i).getPix2().getX()+5.6,boxes.get(i).getPix2().getY()-5.6));
+			biggerBoxesPoints.add(new Pixel(boxes.get(i).getPix1().getX()-5.6,boxes.get(i).getPix2().getY()-5.6));		
 		}
 		biggerBoxesPoints.add(destination); 
-
 		//checking if point is inside the rectangle
 		Graph G = new Graph(); 
 		String source = "me";

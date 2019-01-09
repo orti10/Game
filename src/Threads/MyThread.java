@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 
 import GIS.Map;
 import Coords.MyCoords;
-import GIS.Direction;
+import Algo.Direction;
 import GUI.MyFrame;
 import Robot.Play;
 import Geom.Pixel;
@@ -94,7 +94,7 @@ public class MyThread extends Thread {
 				mf.repaint();
 			}
 			try {
-				sleep(100);
+				sleep(50);
 
 			} catch (InterruptedException e1) {
 				// TODO Auto-generated catch block

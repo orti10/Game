@@ -10,7 +10,7 @@ import javax.swing.filechooser.*;
 
 import Coords.MyCoords;
 import GIS.Box;
-import GIS.Direction;
+import Algo.Direction;
 import GIS.Fruit;
 import GIS.Game;
 import GIS.Ghost;
