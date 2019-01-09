@@ -82,7 +82,7 @@ public class MyFrame extends JFrame {
 		open.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,  ActionEvent.CTRL_MASK));
 		exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E,  ActionEvent.CTRL_MASK));
 		runAuto.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,  ActionEvent.CTRL_MASK));
-
+		runMouse.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_M,  ActionEvent.CTRL_MASK));
 
 		this.setJMenuBar(menuBar);
 		try {
@@ -130,6 +130,7 @@ public class MyFrame extends JFrame {
 				dispose();
 			}
 		});
+		//press when the user locate the player on the frame
 		myplayer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addMouseListener(new MouseAdapter() {
@@ -150,7 +151,7 @@ public class MyFrame extends JFrame {
 			}
 		});
 
-		//if the user wants to run the game
+		//if the user wants to run the game automatically
 		//using Thread to make the moves to be on the same time when the game is running
 		runAuto.addActionListener(new ActionListener() {
 			@Override
@@ -162,9 +163,9 @@ public class MyFrame extends JFrame {
 			}
 
 		});
-
-		runMouse.addActionListener(new ActionListener() 
-		{		
+		//if the user wants to play the game by pressing on the targets and eat them
+		//using Thread to make the moves to be on the same time when the game is running
+		runMouse.addActionListener(new ActionListener() {		
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
@@ -181,6 +182,7 @@ public class MyFrame extends JFrame {
 							double azimuth = mc.azimuth_elevation_dist(game.getMyplayer().getGps(),mouse)[0];
 							thread.setAzimuth(azimuth);
 						}
+						//extra check
 						if(!play1.isRuning()) {
 							Pixel click = new Pixel(arg.getX(),arg.getY());
 							MyThread t = new MyThread(MyFrame.this,game,play1);
@@ -197,12 +199,12 @@ public class MyFrame extends JFrame {
 	 * the size of them and how they will be represented on the frame.
 	 * keeps proportion of the screen when the user moves it using "Proportion" method.
 	 */
-	public void paint(Graphics g)
-	{
+	public void paint(Graphics g) {
+		
 		this.setJMenuBar(getJMenuBar());
 
 		try {
-
+  
 			packmanIcon =ImageIO.read(new File("Icons/pacman.png"));
 			fruitIcon =ImageIO.read(new File("Icons/fruit.png"));
 			ghostIcon =ImageIO.read(new File("Icons/ghost.png"));
@@ -288,7 +290,6 @@ public class MyFrame extends JFrame {
 	}
 
 	public static void main(String[] args){
-
 		MyFrame mf = new MyFrame();
 		mf.setVisible(true);
 		mf.setSize(mf.myImage.getWidth(),mf.myImage.getHeight());

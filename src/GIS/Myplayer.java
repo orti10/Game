@@ -3,6 +3,12 @@ package GIS;
 import Geom.Pixel;
 import Geom.Point3D;
 
+/**
+ * 
+ * @author Ortal, Tomer and Avichay
+ * @note This class represent the main player on board.
+ * My Player is a purple icon ('M')
+ */
 public class Myplayer {
 	private String type;
 	private int id ;

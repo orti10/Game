@@ -1,14 +1,9 @@
 package Threads;
 
 import GIS.Game;
-import java.awt.event.MouseEvent;
-import GIS.Map;
-import Coords.MyCoords;
 import Algo.Direction;
 import GUI.MyFrame;
 import Robot.Play;
-import Geom.Pixel;
-import Geom.Point3D;
 
 /**
  * @author Ortal, Tomer and Avichay
@@ -20,19 +15,19 @@ public class MyThread extends Thread {
 	private Game game;
 	private MyFrame mf;
 	private Play play1;
-	private Map m;
-	private double dgree;
+	private double azimuth;
 	private boolean mouse;
 
 	/**
 	 * 
 	 * @param mf (MyFrame)
 	 * @param game
+	 * @param play1 (the server)
 	 * 
-	 * @note this method using the frame the game already existing.
+	 * this constructor using the frame the game already existing.
 	 */
 	public MyThread (MyFrame mf,Game game,Play play1) {
-		super();
+		super();//we are extending "Thread"
 		this.mf = mf;
 		this.game = game;
 		this.play1=play1;
@@ -40,12 +35,12 @@ public class MyThread extends Thread {
 
 
 	public double getAzimuth() {
-		return dgree;
+		return azimuth;
 	}
 
 
-	public void setAzimuth(double dgree) {
-		this.dgree = dgree;
+	public void setAzimuth(double azimuth) {
+		this.azimuth = azimuth;
 	}
 
 	public boolean isMouse() {
@@ -64,13 +59,13 @@ public class MyThread extends Thread {
 
 	public void run() {
 
-		play1.start();	
+		play1.start();
 		Direction dir = new Direction();
 		double teta =0;
 		
 		while(play1.isRuning()) {
 
-			if(mouse == true) {
+			if(mouse == true) { //if the game works by mouse click on the frame
 				play1.rotate(getAzimuth());
 				game.getFruits().clear();
 				game.getPacmans().clear();
@@ -80,7 +75,7 @@ public class MyThread extends Thread {
 
 				mf.repaint();
 			}
-			if(mouse ==false) {
+			if(mouse ==false) { //if the game works automatically
 				teta =dir.direction(game);
 				play1.rotate(teta);
 				game.getFruits().clear();
@@ -92,9 +87,9 @@ public class MyThread extends Thread {
 				mf.repaint();
 			}
 			
-			if(game.getFruits().isEmpty()) {
+			if(game.getFruits().isEmpty()) { //when the fruits are over - the game is over.
 				System.out.println("GAME OVER !!!!");
-				play1.stop();
+				play1.stop(); //calling to play1 to stop
 			}
 			
 			try {

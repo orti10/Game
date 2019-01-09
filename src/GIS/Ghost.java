@@ -3,6 +3,12 @@ package GIS;
 import Geom.Pixel;
 import Geom.Point3D;
 
+/**
+ * 
+ * @author Ortal, Tomer and Avichay
+ * @note This class represent a ghost on board.
+ * ghost is icon ('G')
+ */
 public class Ghost {
 
 	private String type;

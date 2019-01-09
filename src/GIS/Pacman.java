@@ -7,7 +7,7 @@ import java.awt.Color;
  * 
  * @author Ortal, Tomer and Avichay
  * @note This class represent a pacman with getter and setters data.
- * Pacman is YELLOW on the frame.
+ * Pacman is YELLOW on the frame. ('P')
  */
 public class Pacman {
 	private String type;

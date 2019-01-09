@@ -10,29 +10,32 @@ import graph.Node;
 /**
  * This main class demonstrate a use of Dijkstra algorithm for finding the shortest path
  * between a source vertex on a graph to all other vertices.
- * The main class is based on the image of p_graph_ex4.png
- * Note: this version includes a bug fix performed on the 6.1.2019 (v0.11) 
- * @author ben-moshe
+ * @author Ortal, Tomer and Avichay
  *
  */
 public class Dijkstra {
 
+	/**
+	 * 
+	 * @param boxes (ArrayList)
+	 * @param position (Pixel point)
+	 * @param destination (Pixel point)
+	 * @return Pixel point that represent the next destination
+	 */
 	public Pixel dijkstraAlgo(ArrayList<Box> boxes, Pixel position, Pixel destination ) {
 		Map m = new Map();
-
+		//bigger Boxes Points is all the boxes with extra height and weigh for the proportion
 		ArrayList<Pixel> biggerBoxesPoints = new ArrayList<>();
-
 
 		biggerBoxesPoints.add(position);
 		for (int i = 0; i < boxes.size(); i++) {
-			//5.6 limit of my player and dijkstra in the frame
-			biggerBoxesPoints.add(new Pixel(boxes.get(i).getPix1().getX()-5.6,boxes.get(i).getPix1().getY()+5.6));
-			biggerBoxesPoints.add(new Pixel(boxes.get(i).getPix2().getX()+5.6,boxes.get(i).getPix1().getY()+5.6));
-			biggerBoxesPoints.add(new Pixel(boxes.get(i).getPix2().getX()+5.6,boxes.get(i).getPix2().getY()-5.6));
-			biggerBoxesPoints.add(new Pixel(boxes.get(i).getPix1().getX()-5.6,boxes.get(i).getPix2().getY()-5.6));		
+			//5.6 limit of my player and Dijkstra in the frame
+			biggerBoxesPoints.add(new Pixel(boxes.get(i).getPix1().getX()-5.6,boxes.get(i).getPix1().getY()+5.6));//(x1,y1)
+			biggerBoxesPoints.add(new Pixel(boxes.get(i).getPix2().getX()+5.6,boxes.get(i).getPix1().getY()+5.6));//(x2,y1)
+			biggerBoxesPoints.add(new Pixel(boxes.get(i).getPix2().getX()+5.6,boxes.get(i).getPix2().getY()-5.6));//(x2,y2)
+			biggerBoxesPoints.add(new Pixel(boxes.get(i).getPix1().getX()-5.6,boxes.get(i).getPix2().getY()-5.6));//(x1,y2)		
 		}
 		biggerBoxesPoints.add(destination); 
-		//checking if point is inside the rectangle
 		Graph G = new Graph(); 
 		String source = "me";
 		String target = "food";
@@ -62,14 +65,10 @@ public class Dijkstra {
 		}
 		// This is the main call for computing all the shortest path from node 0 ("a")
 		Graph_Algo.dijkstra(G, source);
-
 		Node b = G.getNodeByName(target);
-
 		ArrayList<String> shortestPath = b.getPath();
-
 		String s = shortestPath.get(1);
 		Pixel ans = biggerBoxesPoints.get(Integer.parseInt(s));	
 		return ans;		
 	}
-
 }

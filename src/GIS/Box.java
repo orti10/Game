@@ -3,9 +3,11 @@ package GIS;
 import Geom.Pixel;
 import Geom.Point3D;
 
-
 /**
- * This class represent a box on board.
+ * 
+ * @author Ortal, Tomer and Avichay
+ * @note This class represent a box on board.
+ * box is Black
  */
 public class Box {
 

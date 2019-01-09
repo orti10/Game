@@ -7,7 +7,7 @@ import java.awt.Color;
  * 
  * @author Ortal, Tomer and Avichay
  * @note This class represent a Fruit with getter and setters data.
- * Fruit is RED on the frame
+ * Fruit is RED on the frame ('F')
  */
 
 public class Fruit {

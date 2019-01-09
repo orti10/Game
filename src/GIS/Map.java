@@ -6,14 +6,13 @@ import Coords.MyCoords;
 import Geom.Pixel;
 import Geom.Point3D;
 
-
 /**
  * @author Ortal, Tomer and Avichay
  * @note this class represent the basic calculation of coordinate on point3D and Pixels
  * convert each other and using also meters and distance.
  * to make sure the data will be represent real and clear.
  * 
- * using help from : 
+ * got help from : 
  * //https://stackoverflow.com/questions/14329691/convert-latitude-longitude-point-to-a-pixels-x-y-on-mercator-projection?rq=1
 	//https://stackoverflow.com/questions/35299786/draw-circle-on-jpanel-after-mouse-click/35300018
  */
@@ -25,6 +24,7 @@ public class Map {
 	private double north = 32.106046;
 	private double east = 35.212405;
 	private double south = 32.101858;
+
 	/**
 	 * @param latitude and longitude
 	 * function to convert from coordinate to pixel
@@ -43,7 +43,6 @@ public class Map {
 	 * @return coordinate
 	 */
 	public Point3D getLatLonfromXY(Pixel p) {
-
 		double lat =((p.getY()*(south-north))/mapHeight)+north;
 		double lon  = ((p.getX()*(east-west))/mapWidth)+west;
 		return new Point3D(lat,lon);
@@ -89,6 +88,7 @@ public class Map {
 
 		double a = ((x4-x3)*(y1-y3)-(y4-y3)*(x1-x3))/((y4-y3)*(x2-x1)-(x4-x3)*(y2-y1));
 		double b = ((x2-x1)*(y1-y3)-(y2-y1)*(x1-x3))/((y4-y3)*(x2-x1)-(x4-x3)*(y2-y1));
+
 		if(a>0 && a<1 && b>0 && b<1) {
 			return true;
 		}		
@@ -103,7 +103,7 @@ public class Map {
 			lines.add(new Line(new Pixel(boxes.get(i).getPix1().getX(),boxes.get(i).getPix1().getY()),new Pixel(boxes.get(i).getPix1().getX(),boxes.get(i).getPix2().getY())));
 			lines.add(new Line(new Pixel(boxes.get(i).getPix2().getX(),boxes.get(i).getPix2().getY()),new Pixel(boxes.get(i).getPix2().getX(),boxes.get(i).getPix1().getY())));
 		}
-		
+
 		for (int i = 0; i < lines.size(); i++) {
 			if(CrossingALine(lines.get(i).getStart(), lines.get(i).getEnd(), source, target)) {
 				return true;
@@ -111,5 +111,4 @@ public class Map {
 		}
 		return false;
 	}
-
 }
