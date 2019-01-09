@@ -22,7 +22,7 @@ The player can load a .csv file.
 
 ## Java Jars
 1) Ex4_v0.2.jar - this jar is the server of the game.
-2) Graph_v0.1.jar
+2) Graph_v0.11.jar
 3) mysql-connector-java-5.1.47.jar
 
 ## Packages
