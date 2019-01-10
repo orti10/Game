@@ -211,20 +211,22 @@ public class MyFrame extends JFrame {
 
 		g.drawImage(MyplayerIcon,(int)game.getMyplayer().getPix().getX(),(int) game.getMyplayer().getPix().getY(),null);	
 
-		for (Pacman p : game.getPacmans()) {
-			g.drawImage(packmanIcon,(int) p.getPix().getX(), (int) p.getPix().getY(),null);	
+		for (int i = 0; i < game.getPacmans().size(); i++) {
+			g.drawImage(packmanIcon,(int) game.getPacmans().get(i).getPix().getX(), (int) game.getPacmans().get(i).getPix().getY(),null);	
 		}
 		for (int i = 0; i < game.getFruits().size(); i++) { 
 			g.drawImage(fruitIcon,(int) game.getFruits().get(i).getPix().getX(), (int) game.getFruits().get(i).getPix().getY(),null);	
 		}
-		for (Box box : game.getBoxes()) {
+		for (int i = 0; i < game.getBoxes().size(); i++) {
 			g.setColor(Color.black);
-			g.fillRect((int)box.getPix1().getX(),(int)box.getPix2().getY(), (int)(box.getPix2().getX()-box.getPix1().getX()), (int)(box.getPix1().getY()-box.getPix2().getY()));	
+			g.fillRect((int)game.getBoxes().get(i).getPix1().getX(),(int)game.getBoxes().get(i).getPix2().getY(),
+					(int)(game.getBoxes().get(i).getPix2().getX()-game.getBoxes().get(i).getPix1().getX()),
+					(int)(game.getBoxes().get(i).getPix1().getY()-game.getBoxes().get(i).getPix2().getY()));	
 		}
-		for (Ghost ghost : game.getGhosts()) {
-			g.drawImage(ghostIcon,(int)ghost.getPix().getX(), (int)ghost.getPix().getY(),null);
+		for (int i = 0; i < game.getGhosts().size(); i++) {
+			g.drawImage(ghostIcon,(int)game.getGhosts().get(i).getPix().getX(), (int)game.getGhosts().get(i).getPix().getY(),null);
 		}
-
+		
 		Proportionsize ( w , h);
 	}
 

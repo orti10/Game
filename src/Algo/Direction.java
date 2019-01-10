@@ -81,7 +81,6 @@ public class Direction {
 			}
 			else {//if Pacman is the closest item-checking if there is a box between player and the pacman (current target) 
 
-
 				if(!m.closeBoxVertexs(game.getBoxes(), game.getMyplayer().getPix(),game.getPacmans().get(minIndex).getPix())) {
 					//calculating the azimuth with MyCoords function object
 					return teta = mc.azimuth_elevation_dist(game.getMyplayer().getGps(), game.getPacmans().get(minIndex).getGps())[0];	
@@ -95,7 +94,8 @@ public class Direction {
 				}
 			}
 		}
-		else return teta;
+		else 
+			return teta;
 	}
 
 	/**
