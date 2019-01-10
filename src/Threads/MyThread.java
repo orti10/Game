@@ -7,7 +7,7 @@ import Robot.Play;
 
 /**
  * @author Ortal, Tomer and Avichay
- * @note this class extends "Thread" to be able to 
+ * this class extends "Thread" to be able to 
  * move on the same time pacmans and creating them paths and etc. 
  */
 public class MyThread extends Thread {
@@ -32,7 +32,6 @@ public class MyThread extends Thread {
 		this.game = game;
 		this.play1=play1;
 	}
-
 
 	public double getAzimuth() {
 		return azimuth;
@@ -62,36 +61,21 @@ public class MyThread extends Thread {
 		play1.start();
 		Direction dir = new Direction();
 		double teta =0;
-		
+
 		while(play1.isRuning()) {
 
 			if(mouse == true) { //if the game works by mouse click on the frame
 				play1.rotate(getAzimuth());
-				game.getFruits().clear();
-				game.getPacmans().clear();
-				game.getGhosts().clear();
-				game.getBoxes().clear();
-				game.ReadBoard(play1.getBoard());
-
-				mf.repaint();
 			}
-			if(mouse ==false) { //if the game works automatically
+			else if(mouse ==false) { //if the game works automatically
 				teta =dir.direction(game);
 				play1.rotate(teta);
-				game.getFruits().clear();
-				game.getPacmans().clear();
-				game.getGhosts().clear();
-				game.getBoxes().clear();
-				game.ReadBoard(play1.getBoard());
-				
-				mf.repaint();
 			}
-			
-			if(game.getFruits().isEmpty()) { //when the fruits are over - the game is over.
-				System.out.println("GAME OVER !!!!");
-				play1.stop(); //calling to play1 to stop
-			}
-			
+			game.CleanBoard();
+			game.ReadBoard(play1.getBoard());
+
+			mf.repaint();
+
 			try {
 				sleep(50);
 

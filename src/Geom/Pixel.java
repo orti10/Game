@@ -1,7 +1,7 @@
 package Geom;
 /**
  * @author Ortal, Tomer and Avichay
- * @note This class is for calculate the proportions between coordinates and pixels 
+ * This class is for calculate the proportions between coordinates and pixels 
  * on the board game and the frame of it.
  */
 public class Pixel {

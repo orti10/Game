@@ -10,7 +10,7 @@ import Geom.Point3D;
 /**
  * 
  * @author Ortal, Tomer and Avichay
- * @note this class represent the game having data from two array lists
+ * this class represent the game having data from two array lists
  * one of pacmans and the other of fruits
  */
 public class Game implements Runnable {
@@ -75,7 +75,6 @@ public class Game implements Runnable {
 					box.setPix1(pixel1);
 					box.setPix2(pixel2);
 					this.boxes.add(box);
-
 				}
 				else if (s[0].contains("G")){
 					Ghost ghost = new Ghost();
@@ -93,7 +92,14 @@ public class Game implements Runnable {
 			er.printStackTrace();
 		}
 	}
-
+	// this method cleans the all the icons on the game
+	public void CleanBoard() {
+		getFruits().clear();
+		getPacmans().clear();
+		getGhosts().clear();
+		getBoxes().clear();
+	}
+	
 	public void ReadBoard(ArrayList<String> board) {
 		Map m = new Map();
 		for (int i = 0; i < board.size(); i++) {
@@ -129,7 +135,6 @@ public class Game implements Runnable {
 				box.setPix1(pixel1);
 				box.setPix2(pixel2);
 				this.boxes.add(box);
-
 			}
 			else if (s[0].contains("G")){
 				Ghost ghost = new Ghost();
@@ -138,7 +143,6 @@ public class Game implements Runnable {
 				Pixel pixel = m.getXYfromLatLon(ghost.getGps());
 				ghost.setPix(pixel);
 				this.ghosts.add(ghost);
-
 			}
 			else if (s[0].contains("M")){
 				myplayer.setId(Integer.parseInt(s[1]));
@@ -184,6 +188,7 @@ public class Game implements Runnable {
 	public void setFruits(ArrayList<Fruit> fruits) {
 		this.fruits = fruits;
 	}
+	
 	/**
 	 * Constructor
 	 * @param ap array list of Pacman
@@ -193,7 +198,6 @@ public class Game implements Runnable {
 	 * @param myplayer a new main player
 	 * 
 	 */
-
 	public Game(Myplayer myplayer ,ArrayList<Pacman> pacmans, ArrayList<Fruit> fruits, ArrayList<Box> boxes, ArrayList<Ghost> ghosts) {
 		this.myplayer = myplayer;
 		this.pacmans = pacmans;
@@ -212,5 +216,4 @@ public class Game implements Runnable {
 		// TODO Auto-generated method stub
 
 	}
-
 }

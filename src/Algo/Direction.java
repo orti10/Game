@@ -12,7 +12,7 @@ import Geom.Point3D;
 /**
  * 
  * @author Ortal ,Tomer and Avichay
- * @note this class represents the direction (angle)
+ * this class represents the direction (angle)
  * from the player to the closet item.
  *
  */
@@ -95,7 +95,7 @@ public class Direction {
 				}
 			}
 		}
-		return teta;
+		else return teta;
 	}
 
 	/**

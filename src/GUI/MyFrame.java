@@ -1,4 +1,5 @@
 package GUI;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -6,7 +7,6 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.File;
 import javax.swing.filechooser.*;
-
 import Coords.MyCoords;
 import GIS.Box;
 import GIS.Fruit;
@@ -23,14 +23,14 @@ import javax.imageio.ImageIO;
 
 
 /**
- * @note Code taken from: https://javatutorial.net/display-text-and-graphics-java-jframe
- * 
+ *  Code taken from: https://javatutorial.net/display-text-and-graphics-java-jframe
+ * //https://coderanch.com/t/338737/java/draw-points-Java
  */
-//https://coderanch.com/t/338737/java/draw-points-Java
+
 
 /**
  * @author Ortal, Tomer and Avichay
- * @note This class creates the frame of the whole game
+ * This class creates the frame of the whole game
  * makes sure everything works with harmoniously
  */
 public class MyFrame extends JFrame {
@@ -42,7 +42,6 @@ public class MyFrame extends JFrame {
 	private MyThread thread;
 	private MyCoords mc = new MyCoords();
 
-
 	private double w = 1386;
 	private double h = 732;
 
@@ -53,7 +52,7 @@ public class MyFrame extends JFrame {
 		initGUI();	
 	}
 	/** void method
-	 * @note This method controls the activation on the menu and create this response
+	 * This method controls the activation on the menu and create this response
 	 */
 	private void initGUI() {
 
@@ -182,12 +181,6 @@ public class MyFrame extends JFrame {
 							double azimuth = mc.azimuth_elevation_dist(game.getMyplayer().getGps(),mouse)[0];
 							thread.setAzimuth(azimuth);
 						}
-						//extra check
-						if(!play1.isRuning()) {
-							Pixel click = new Pixel(arg.getX(),arg.getY());
-							MyThread t = new MyThread(MyFrame.this,game,play1);
-							t.start();
-						}
 					}
 				});
 			}
@@ -221,8 +214,8 @@ public class MyFrame extends JFrame {
 		for (Pacman p : game.getPacmans()) {
 			g.drawImage(packmanIcon,(int) p.getPix().getX(), (int) p.getPix().getY(),null);	
 		}
-		for (Fruit f : game.getFruits()) {
-			g.drawImage(fruitIcon,(int) f.getPix().getX(), (int) f.getPix().getY(),null);	
+		for (int i = 0; i < game.getFruits().size(); i++) { 
+			g.drawImage(fruitIcon,(int) game.getFruits().get(i).getPix().getX(), (int) game.getFruits().get(i).getPix().getY(),null);	
 		}
 		for (Box box : game.getBoxes()) {
 			g.setColor(Color.black);
