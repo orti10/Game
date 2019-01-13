@@ -5,17 +5,17 @@ Codding by: Tomer Maabari ,Ortal Hanoch and Avichay Nega.
 ## General
 The game is about the classic Pacman game who eat fruits and gets score.
 
-The game board is a picture of a map with pixels who from Google Earth GPS coordinates.
+The game board background is of Ariel University from google earth.
 
-The goal of this game is finishing the fruits as fast as possible.
+The goal of this game is to finish all the fruits as fast as possible.
 
 The player can eat pacmans and fruits as well.
 
-The player blocks by black boxes.
+The player is blocked by black boxes.
 
-The player needs to run away from the scary ghoset.
+The player needs to run away from the scary ghosts.
 
-The player can load a .csv file.
+The player can load a .csv files.
 
 ## Example
 For csv file number #8 id:306711633 we got the score 35.0.
@@ -28,8 +28,8 @@ For csv file number #8 id:306711633 we got the score 35.0.
 * [Dijkstra source](https://www.baeldung.com/java-dijkstra)
 
 ## Game options
-1) Automatic game. The only decition is where to locate the main player.
-2) Mouse follow game. The palyer decide where to locate the main player and also responsible where to move him for the intare game.
+1) Automatic game. The only decision is where to locate the main player.
+2) Mouse follow game. The palyer decides where to locate the main player and also responsible where to move him for the entire game.
 
 ## Java Jars
 1) Ex4_v0.2.jar - this jar is the server of the game.
@@ -39,10 +39,10 @@ For csv file number #8 id:306711633 we got the score 35.0.
 ## Packages
 * Algorithms --> Recursive scan of a folder. For each file in "CSV" format and creates a data structure of information.
 * Coords --> GPS coordinate.
-* File_format --> Convert "scv" and "path" format to kml file format.
+* File_format --> Convert "csv" and "path" format to kml file format.
 * Geom --> convert pixel to coordinate and contrary.
 * GIS --> The main objects for this game (Pacman,Fruits,Path,MyPlayer,Direction and etc.).
-* GUI --> The board (Frame) of the game incloud picture of the map and an update Pacmans and Fruits for each game.
+* GUI --> The board (Frame) of the game incloud pictures of the map and an update Pacmans and Fruits for each game.
 * Threads --> Standard thread. map
 
 Excample of the board game:
