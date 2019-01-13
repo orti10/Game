@@ -21,12 +21,10 @@ import Robot.Play;
 import Threads.MyThread;
 import javax.imageio.ImageIO;
 
-
 /**
  *  Code taken from: https://javatutorial.net/display-text-and-graphics-java-jframe
  * //https://coderanch.com/t/338737/java/draw-points-Java
  */
-
 
 /**
  * @author Ortal, Tomer and Avichay
@@ -188,7 +186,7 @@ public class MyFrame extends JFrame {
 	}
 	/**
 	 * @param Graphics g
-	 * @note This void method creating the frame with pacmans and fruits , 
+	 * This void method creating the frame with pacmans and fruits , 
 	 * the size of them and how they will be represented on the frame.
 	 * keeps proportion of the screen when the user moves it using "Proportion" method.
 	 */
@@ -234,7 +232,7 @@ public class MyFrame extends JFrame {
 	 * 
 	 * @param w width of screen
 	 * @param h height of screen
-	 * @note this void method calculate the proportion size of the screen.
+	 * this void method calculate the proportion size of the screen.
 	 */
 	public void Proportionsize ( double w , double h) {
 

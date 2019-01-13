@@ -27,7 +27,9 @@ public class DataBase {
 
 			//select data, someDouble represent the code of the file we run on
 			// for example '306711633' (the id or file name hash) is file number #8
-			// automatically we got 35.0 points and mouselly we got 5.1 points
+			// automatically we got 35.0 points and mouselly we got 11.0 points  
+			
+			                                                    //FirstID='205672538' AND 
 			String allCustomersQuery = "SELECT * FROM logs WHERE FirstID='205672538' AND someDouble=306711633;";
 			ResultSet resultSet = statement.executeQuery(allCustomersQuery);//ביצוע שאילתה
 			System.out.println("FirstID\t\tSecondID\tThirdID\t\tLogTime\t\t\t\tPoint\t\tSomeDouble");

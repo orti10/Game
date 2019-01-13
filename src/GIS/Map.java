@@ -31,7 +31,6 @@ public class Map {
 	 * @return pixel
 	 */
 	public Pixel getXYfromLatLon(Point3D gps1) {
-
 		double y = (mapHeight*gps1.x() - mapHeight*north)/(south-north);
 		double x = (mapWidth*gps1.y() - mapWidth*west)/(east-west);
 		return new Pixel(x,y);
