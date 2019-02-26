@@ -47,5 +47,3 @@ For csv file number #8 id:306711633 we got the score 35.0.
 
 Excample of the board game:
 ![ex game](https://user-images.githubusercontent.com/44768171/50734645-8aa9b100-11aa-11e9-984f-d4787c037e8a.png)
-The class Diagram:
-![gamediagram](https://user-images.githubusercontent.com/44768171/50905690-0cf4d800-142c-11e9-8889-0e3257a3b683.jpg)
