@@ -1,5 +1,5 @@
 # Pacman Game
-Codding by: Tomer Maabari ,Ortal Hanoch and Avichay Nega.
+Codding by: Tomer Maabari ,Ortal Hanoch
 * Exercise number 4 on Computer Science and Mathematics , Ariel University 2018.
 
 ## General
